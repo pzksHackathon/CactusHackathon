@@ -1,13 +1,13 @@
 #ifndef NEWPOSTUI_H
 #define NEWPOSTUI_H
 
-#include <QMainWindow>
+#include <QDialog>
 
 namespace Ui {
 class NewPostUI;
 }
 
-class NewPostUI : public QMainWindow
+class NewPostUI : public QDialog
 {
     Q_OBJECT
 

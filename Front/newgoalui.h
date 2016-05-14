@@ -1,25 +1,22 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef NEWGOALUI_H
+#define NEWGOALUI_H
 
-#include <QMainWindow>
+#include <QDialog>
 
 namespace Ui {
-class MainWindow;
+class NewGoalUI;
 }
 
-class MainWindow : public QMainWindow
+class NewGoalUI : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private slots:
-    void on_AddStep_Button_clicked();
+    explicit NewGoalUI(QWidget *parent = 0);
+    ~NewGoalUI();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::NewGoalUI *ui;
 };
 
-#endif // MAINWINDOW_H
+#endif // NEWGOALUI_H

@@ -1,19 +1,14 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "newgoalui.h"
+#include "ui_newgoalui.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+NewGoalUI::NewGoalUI(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::NewGoalUI)
 {
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
+NewGoalUI::~NewGoalUI()
 {
     delete ui;
-}
-
-void MainWindow::on_AddStep_Button_clicked()
-{
-
 }

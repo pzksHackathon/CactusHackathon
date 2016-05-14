@@ -2,7 +2,7 @@
 #include "ui_newpostui.h"
 
 NewPostUI::NewPostUI(QWidget *parent) :
-    QMainWindow(parent),
+    QDialog(parent),
     ui(new Ui::NewPostUI)
 {
     ui->setupUi(this);
