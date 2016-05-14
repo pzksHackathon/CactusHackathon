@@ -35,5 +35,10 @@ HEADERS += \
     organizerui.h \
     newpostui.h \
     newgoalui.h \
-    steptime.h
+    steptime.h \
+    day.h \
+    month.h
+
+DISTFILES += \
+    origanizer.pro.user
 

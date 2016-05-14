@@ -31,6 +31,15 @@ OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
         QPushButton * curButton = ui->Calendar_frame->findChild<QPushButton*>(curButtonName);
         connect(curButton, SIGNAL (released()),this, SLOT (onCalendarButtonClicked()));
     }
+    Calendar calendar = Calendar(30, 6);
+
+	for (int i = 0; i < calendar.getMounth()->getWeeks(); i++) 
+		for (int j = 0; j < 7; j++) 
+		{ 
+			QString tmpstring = QString("cal_button_%1").arg(QString::number(i * 7 + j + 1)); 
+			QPushButton * label = ui->Calendar_frame->findChild<QPushButton *>(tmpstring); 
+			label->setText(QString("%1").arg(QString::number(calendar.getMounth()->date(i, j)))); 
+	}
 
 }
 void OrganizerUI::onCalendarButtonClicked()
