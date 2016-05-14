@@ -1,18 +1,18 @@
 #ifndef STEP
 #define STEP
 #include <QTime>
-#include <string>
+#include <QString>
 using namespace std;
 class Step{
 private:
-    string title;
+    QString title;
     QTime initialTimeToFinish;
     QTime timeToFinish;
     bool completed;
 public:
-    Step(string title, QTime timeToFinish);
+    Step(QString title, QTime timeToFinish);
     bool isCompleted();
-    string getTitle();
+    QString getTitle();
     QTime getTimeLeft();
     QTime getInitialTime();
     void reduceStepTime(QTime time);

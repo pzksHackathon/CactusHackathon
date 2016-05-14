@@ -1,29 +1,29 @@
 #include "goal.h"
 
 
-Goal::Goal(string name, string description, string category)
+Goal::Goal(QString name, QString description, QString category)
 {
     this->title = name;
     this->description = description;
     this->category = category;
 }
 
-string Goal::getTitle()
+QString Goal::getTitle()
 {
     return title;
 }
 
-string Goal::getDescription()
+QString Goal::getDescription()
 {
     return description;
 }
 
-string Goal::getCategory()
+QString Goal::getCategory()
 {
     return category;
 }
 
-void Goal::addNewStep(string title, QTime timeToFinish)
+void Goal::addNewStep(QString title, QTime timeToFinish)
 {
     Step * step = new Step(title, timeToFinish);
     this->steps.push_back(step);
@@ -48,7 +48,7 @@ bool Goal::isStepCompleted(int index)
     return steps.at(index)->isCompleted();
 }
 
-string Goal::getStepTitle(int index)
+QString Goal::getStepTitle(int index)
 {
     return steps.at(index)->getTitle();
 }

@@ -1,6 +1,6 @@
 #include "step.h"
 
-Step::Step(std::string title, QTime timeToFinish)
+Step::Step(QString title, QTime timeToFinish)
 {
     this->title = title;
     this->timeToFinish = timeToFinish;
@@ -12,7 +12,7 @@ bool Step::isCompleted()
     return completed;
 }
 
-string Step::getTitle()
+QString Step::getTitle()
 {
     return title;
 }

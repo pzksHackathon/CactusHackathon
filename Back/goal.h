@@ -2,28 +2,28 @@
 #define GOAL
 #include <algorithm>
 #include <vector>
-#include <string>
+#include <QString>
 #include "step.h"
 using namespace std;
 class Goal{
 private:
-    string title;
-    string description;
-    string category;
+    QString title;
+    QString description;
+    QString category;
     vector<Step *> steps;
 public:
-    Goal(string name, string description, string category);
-    string getTitle();
-    string getDescription();
-    string getCategory();
-    void addNewStep(string title, QTime timeToFinish);
+    Goal(QString name, QString description, QString category);
+    QString getTitle();
+    QString getDescription();
+    QString getCategory();
+    void addNewStep(QString title, QTime timeToFinish);
     int getStepCount();
     /**
      * @brief If successfull returns true. If not - false.
      */
     bool reduceStepTime(int index, QTime time);
     bool isStepCompleted(int index);
-    string getStepTitle(int index);
+    QString getStepTitle(int index);
     QTime getStepTimeLeft(int index);
     QTime getStepInitialTime(int index);
 };
