@@ -53,21 +53,6 @@
                 <height>40</height>
                </size>
               </property>
-              <item>
-               <property name="text">
-                <string>First goal</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Second goal</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Third goal</string>
-               </property>
-              </item>
              </widget>
             </item>
             <item>
@@ -128,6 +113,9 @@
               </property>
               <property name="wordWrap">
                <bool>true</bool>
+              </property>
+              <property name="margin">
+               <number>15</number>
               </property>
              </widget>
             </item>
@@ -221,7 +209,7 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QLabel" name="step1hoursPerStepLeft_label_2">
+                  <widget class="QLabel" name="step2hoursPerStepLeft_label">
                    <property name="text">
                     <string>__step1HoursPerStepLeft__</string>
                    </property>
@@ -317,7 +305,7 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QLabel" name="step1hoursPerStepLeft_label_3">
+                  <widget class="QLabel" name="step3hoursPerStepLeft_label">
                    <property name="text">
                     <string>__step1HoursPerStepLeft__</string>
                    </property>
@@ -413,7 +401,7 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QLabel" name="step1hoursPerStepLeft_label_4">
+                  <widget class="QLabel" name="step4hoursPerStepLeft_label">
                    <property name="text">
                     <string>__step1HoursPerStepLeft__</string>
                    </property>
@@ -509,7 +497,7 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QLabel" name="step1hoursPerStepLeft_label_5">
+                  <widget class="QLabel" name="step5hoursPerStepLeft_label">
                    <property name="text">
                     <string>__step1HoursPerStepLeft__</string>
                    </property>
@@ -699,7 +687,7 @@
                      </size>
                     </property>
                     <property name="text">
-                     <string>__timerStart__</string>
+                     <string>Start!</string>
                     </property>
                    </widget>
                   </item>
@@ -735,7 +723,7 @@
                </size>
               </property>
               <property name="text">
-               <string>__goalSave_button__</string>
+               <string>Save</string>
               </property>
              </widget>
             </item>
@@ -748,7 +736,7 @@
                </size>
               </property>
               <property name="text">
-               <string>__newGoal_button__</string>
+               <string>New Goal</string>
               </property>
              </widget>
             </item>
@@ -1217,29 +1205,11 @@
        <attribute name="title">
         <string>Calendar</string>
        </attribute>
-       <widget class="QPushButton" name="pushButton">
-        <property name="geometry">
-         <rect>
-          <x>430</x>
-          <y>330</y>
-          <width>281</width>
-          <height>81</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>16</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Sync with Google Calendar</string>
-        </property>
-       </widget>
        <widget class="QLabel" name="CalendarActions_Label">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>250</y>
+          <x>10</x>
+          <y>240</y>
           <width>381</width>
           <height>141</height>
          </rect>
@@ -1265,8 +1235,8 @@
        <widget class="QFrame" name="Calendar_frame">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>20</y>
+          <x>10</x>
+          <y>10</y>
           <width>612</width>
           <height>207</height>
          </rect>
@@ -1875,6 +1845,24 @@
           </widget>
          </item>
         </layout>
+       </widget>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>320</y>
+          <width>281</width>
+          <height>81</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Sync with Google Calendar</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tab_4">
