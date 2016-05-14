@@ -11,7 +11,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     step.cpp \
-    goal.cpp
+    goal.cpp \
+    organizer.cpp
 
 HEADERS += \
     organizer.h \

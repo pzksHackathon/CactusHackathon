@@ -62,3 +62,9 @@ QTime Goal::getStepInitialTime(int index)
 {
     return steps.at(index)->getInitialTime();
 }
+
+Goal::~Goal()
+{
+    for(Step * step : steps)
+        delete step;
+}

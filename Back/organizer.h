@@ -12,6 +12,10 @@ private:
     Timer * timer;
     Calendar * calendar;
     NotificationManager * notManager;
+public:
+    Goal * addGoal(QString name, QString description, QString category);
+    int getGoalCount();
+    Goal * getGoal(QString title);
 };
 
 #endif // ORGANIZER

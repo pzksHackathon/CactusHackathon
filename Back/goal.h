@@ -26,6 +26,7 @@ public:
     QString getStepTitle(int index);
     QTime getStepTimeLeft(int index);
     QTime getStepInitialTime(int index);
+    ~Goal();
 };
 
 #endif // GOAL
