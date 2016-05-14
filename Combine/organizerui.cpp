@@ -15,7 +15,9 @@ OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
     ui->setupUi(this);
     this->newPostUI_obj = new NewPostUI(this);
     this->newGoalUI_obj = new NewGoalUI(this);
-
+    double hours[] = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f};
+    this->chart = new ProductivityChart(hours);
+    chart->Show(ui->chart_frame);
     // Disable resizing a BattleField window.
     this->setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
     // Disable 'maximize' and 'hide' button in a BattleField window.

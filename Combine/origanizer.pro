@@ -5,11 +5,8 @@ QT += printsupport
 CONFIG += c++11
 
 TARGET = origanizer
-
 CONFIG += console
 CONFIG -= app_bundle
-
-
 
 TEMPLATE = app
 
@@ -21,15 +18,14 @@ SOURCES += main.cpp \
     newpostui.cpp \
     newgoalui.cpp \
     steptime.cpp \
-	qcustomplot.cpp \
+    qcustomplot.cpp \
     productivitychart.cpp
 
-FORMS    += organizerui.ui \
+FORMS += organizerui.ui \
     newpostui.ui \
     newgoalui.ui
 
-HEADERS += \
-    organizer.h \
+HEADERS += organizer.h \
     goal.h \
     timer.h \
     calendar.h \
@@ -41,9 +37,6 @@ HEADERS += \
     steptime.h \
     day.h \
     month.h \
-	qcustomplot.h \
+    qcustomplot.h \
     productivitychart.h
-
-DISTFILES += \
-    origanizer.pro.user
 

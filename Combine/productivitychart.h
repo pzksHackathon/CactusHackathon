@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector>
 #include <QWidget>
+#include <QBoxLayout>
 #include "qcustomplot.h"
 using namespace std;
 class ProductivityChart{
