@@ -6,15 +6,18 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += widgets
 
 TARGET = OrganizemMe
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        organizerui.cpp
+        organizerui.cpp \
+    newpostui.cpp
 
-HEADERS  += organizerui.h
+HEADERS  += organizerui.h \
+    newpostui.h
 
-FORMS    += organizerui.ui
+FORMS    += organizerui.ui \
+    newpostui.ui

@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="mainOrganizerArea_tabWidget">
       <property name="currentIndex">
-       <number>5</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1807,8 +1807,8 @@
          <rect>
           <x>40</x>
           <y>190</y>
-          <width>551</width>
-          <height>211</height>
+          <width>550</width>
+          <height>220</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_27">

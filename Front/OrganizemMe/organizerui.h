@@ -2,6 +2,7 @@
 #define ORGANIZERUI_H
 
 #include <QMainWindow>
+#include "newpostui.h"
 
 namespace Ui {
 class OrganizerUI;
@@ -15,8 +16,11 @@ public:
     explicit OrganizerUI(QWidget *parent = 0);
     ~OrganizerUI();
 
+private slots:
+    void on_newPost_button_clicked();
+
 private:
-    // pointer to object
+    NewPostUI *newPostUI_obj;
     Ui::OrganizerUI *ui;
 };
 

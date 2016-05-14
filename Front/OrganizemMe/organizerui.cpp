@@ -3,11 +3,14 @@
 #include "organizerui.h"
 #include "ui_organizerui.h"
 
+#include "newpostui.h"
+
 OrganizerUI::OrganizerUI(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::OrganizerUI)
 {
     ui->setupUi(this);
+    this->newPostUI_obj = new NewPostUI(this);
 
     // Disable resizing a BattleField window.
     this->setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
@@ -21,4 +24,10 @@ OrganizerUI::OrganizerUI(QWidget *parent) :
 OrganizerUI::~OrganizerUI()
 {
     delete ui;
+}
+
+void OrganizerUI::on_newPost_button_clicked()
+{
+    this->newPostUI_obj->setModal(false);
+    this->newPostUI_obj->show();
 }
