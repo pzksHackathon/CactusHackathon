@@ -2,20 +2,23 @@
 #define STEP
 #include <QTime>
 #include <QString>
+#include "steptime.h"
 using namespace std;
 class Step{
 private:
     QString title;
-    QTime initialTimeToFinish;
-    QTime timeToFinish;
+    StepTime initialTimeToFinish;
+    StepTime timeToFinish;
+    QDateTime deadline;
     bool completed;
 public:
-    Step(QString title, QTime timeToFinish);
+    Step(QString title, StepTime hoursToFinish, QDateTime deadline);
     bool isCompleted();
     QString getTitle();
-    QTime getTimeLeft();
-    QTime getInitialTime();
-    void reduceStepTime(QTime time);
+    StepTime getTimeLeft();
+    StepTime getInitialTime();
+    void reduceStepTime(StepTime time);
+    QDateTime getDeadline();
 };
 
 #endif // STEP

@@ -116,7 +116,8 @@ void OrganizerUI::on_goalTitle_ComboBox_currentIndexChanged(const QString &arg1)
         // Fill hoursPerStepLeft labels.
         QString curPerStepLeftValue = QString("step%1hoursPerStepLeft_label").arg(QString::number(i + 1));
         QLabel *labelTimeLeft = ui->goalSteps_ScrollArea->findChild<QLabel *>(curPerStepLeftValue);
-        labelTimeLeft->setText(goal->getStepTimeLeft(i).toString("hh:mm:ss"));
+        QString labelText = QString("Time left: %1         DeadLine: %2").arg(goal->getStepTimeLeft(i).toString()).arg(goal->getStepDeadline(i).toString("MMM-dd"));
+        labelTimeLeft->setText(labelText);
         labelTimeLeft->setVisible(true);
         // Fill checkBoxes.
         QString checkBoxName = QString("step%1_checkBox").arg(QString::number(i + 1));

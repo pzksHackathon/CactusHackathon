@@ -26,7 +26,6 @@ void NewGoalUI::on_Save_pusButton_clicked()
     // Create a new goal.
 
     Goal *newGoal = organizer->addGoal(title, description, category);
-    qDebug() << "Goal created";
     // Insert steps.
     for (int i = 0; i < 5; i++)
     {
@@ -37,13 +36,12 @@ void NewGoalUI::on_Save_pusButton_clicked()
         }
         QString timeEditName = QString("AddStep_TimEdit_%1").arg(QString::number(i + 1));
         QSpinBox *spinBox = ui->AddStep_ScrollingArea->findChild<QSpinBox *>(timeEditName);
-        int spinBoxTempValue = spinBox->value();
-        if(spinBoxTempValue >= 24) {
-            spinBoxTempValue = 23;
-        }
-        QTime myTime(spinBoxTempValue, 0,0);
+        int hours = spinBox->value();
+        QString dateEditName = QString("dateEdit_%1").arg(QString::number(i + 1));
+        QDateEdit *dateEdit = ui->AddStep_ScrollingArea->findChild<QDateEdit *>(dateEditName);
+        QDateTime dateTime = dateEdit->dateTime();
         // Create a new goal
-        newGoal->addNewStep(lineEdit->text(), myTime);
+        newGoal->addNewStep(lineEdit->text(), StepTime(hours, 0, 0), dateTime);
     }
     OrganizerUI * parent_org = (OrganizerUI *)this->parent();
     parent_org->updateTabGoals();

@@ -39,7 +39,7 @@
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>248</width>
+       <width>321</width>
        <height>22</height>
       </rect>
      </property>
@@ -58,16 +58,34 @@
        <widget class="QLineEdit" name="StepTitle_LineEdit_2"/>
       </item>
       <item>
-       <widget class="QSpinBox" name="AddStep_TimEdit_2"/>
+       <widget class="QSpinBox" name="AddStep_TimEdit_2">
+        <property name="maximum">
+         <number>200</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateEdit" name="dateEdit_2">
+        <property name="minimumDate">
+         <date>
+          <year>2016</year>
+          <month>5</month>
+          <day>15</day>
+         </date>
+        </property>
+        <property name="displayFormat">
+         <string>d/M/yyyy</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
     <widget class="QWidget" name="layoutWidget_3">
      <property name="geometry">
       <rect>
-       <x>490</x>
+       <x>447</x>
        <y>50</y>
-       <width>248</width>
+       <width>291</width>
        <height>22</height>
       </rect>
      </property>
@@ -86,16 +104,44 @@
        <widget class="QLineEdit" name="StepTitle_LineEdit_4"/>
       </item>
       <item>
-       <widget class="QSpinBox" name="AddStep_TimEdit_4"/>
+       <widget class="QSpinBox" name="AddStep_TimEdit_4">
+        <property name="maximum">
+         <number>200</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateEdit" name="dateEdit_4">
+        <property name="dateTime">
+         <datetime>
+          <hour>0</hour>
+          <minute>0</minute>
+          <second>0</second>
+          <year>2016</year>
+          <month>5</month>
+          <day>15</day>
+         </datetime>
+        </property>
+        <property name="minimumDate">
+         <date>
+          <year>2016</year>
+          <month>5</month>
+          <day>15</day>
+         </date>
+        </property>
+        <property name="displayFormat">
+         <string>d/M/yyyy</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
     <widget class="QWidget" name="layoutWidget_4">
      <property name="geometry">
       <rect>
-       <x>490</x>
+       <x>447</x>
        <y>10</y>
-       <width>248</width>
+       <width>291</width>
        <height>22</height>
       </rect>
      </property>
@@ -114,16 +160,34 @@
        <widget class="QLineEdit" name="StepTitle_LineEdit_3"/>
       </item>
       <item>
-       <widget class="QSpinBox" name="AddStep_TimEdit_3"/>
+       <widget class="QSpinBox" name="AddStep_TimEdit_3">
+        <property name="maximum">
+         <number>200</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateEdit" name="dateEdit_3">
+        <property name="minimumDate">
+         <date>
+          <year>2016</year>
+          <month>5</month>
+          <day>15</day>
+         </date>
+        </property>
+        <property name="displayFormat">
+         <string>d/M/yyyy</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
     <widget class="QWidget" name="layoutWidget_5">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>210</x>
        <y>80</y>
-       <width>248</width>
+       <width>311</width>
        <height>22</height>
       </rect>
      </property>
@@ -142,7 +206,25 @@
        <widget class="QLineEdit" name="StepTitle_LineEdit_5"/>
       </item>
       <item>
-       <widget class="QSpinBox" name="AddStep_TimEdit_5"/>
+       <widget class="QSpinBox" name="AddStep_TimEdit_5">
+        <property name="maximum">
+         <number>200</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateEdit" name="dateEdit_5">
+        <property name="minimumDate">
+         <date>
+          <year>2016</year>
+          <month>5</month>
+          <day>15</day>
+         </date>
+        </property>
+        <property name="displayFormat">
+         <string>d/M/yyyy</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -151,7 +233,7 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>248</width>
+       <width>321</width>
        <height>22</height>
       </rect>
      </property>
@@ -170,7 +252,42 @@
        <widget class="QLineEdit" name="StepTitle_LineEdit_1"/>
       </item>
       <item>
-       <widget class="QSpinBox" name="AddStep_TimEdit_1"/>
+       <widget class="QSpinBox" name="AddStep_TimEdit_1">
+        <property name="maximum">
+         <number>200</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateEdit" name="dateEdit_1">
+        <property name="dateTime">
+         <datetime>
+          <hour>0</hour>
+          <minute>0</minute>
+          <second>0</second>
+          <year>2016</year>
+          <month>5</month>
+          <day>15</day>
+         </datetime>
+        </property>
+        <property name="maximumDate">
+         <date>
+          <year>7999</year>
+          <month>12</month>
+          <day>12</day>
+         </date>
+        </property>
+        <property name="minimumDate">
+         <date>
+          <year>2016</year>
+          <month>5</month>
+          <day>15</day>
+         </date>
+        </property>
+        <property name="displayFormat">
+         <string>d/M/yyyy</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

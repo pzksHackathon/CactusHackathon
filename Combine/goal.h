@@ -16,16 +16,17 @@ public:
     QString getTitle();
     QString getDescription();
     QString getCategory();
-    void addNewStep(QString title, QTime timeToFinish);
+    void addNewStep(QString title, StepTime hoursToFinish, QDateTime deadline);
     int getStepCount();
     /**
      * @brief If successfull returns true. If not - false.
      */
-    bool reduceStepTime(int index, QTime time);
+    bool reduceStepTime(int index, StepTime time);
     bool isStepCompleted(int index);
     QString getStepTitle(int index);
-    QTime getStepTimeLeft(int index);
-    QTime getStepInitialTime(int index);
+    StepTime getStepTimeLeft(int index);
+    StepTime getStepInitialTime(int index);
+    QDateTime getStepDeadline(int index);
     ~Goal();
 };
 

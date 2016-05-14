@@ -23,9 +23,9 @@ QString Goal::getCategory()
     return category;
 }
 
-void Goal::addNewStep(QString title, QTime timeToFinish)
+void Goal::addNewStep(QString title, StepTime hoursToFinish, QDateTime deadline)
 {
-    Step * step = new Step(title, timeToFinish);
+    Step * step = new Step(title, hoursToFinish, deadline);
     this->steps.push_back(step);
 }
 
@@ -35,7 +35,7 @@ int Goal::getStepCount()
 }
 
 
-bool Goal::reduceStepTime(int index, QTime time)
+bool Goal::reduceStepTime(int index, StepTime time)
 {
     if(index >= this->getStepCount())
         return false;
@@ -53,14 +53,19 @@ QString Goal::getStepTitle(int index)
     return steps.at(index)->getTitle();
 }
 
-QTime Goal::getStepTimeLeft(int index)
+StepTime Goal::getStepTimeLeft(int index)
 {
     return steps.at(index)->getTimeLeft();
 }
 
-QTime Goal::getStepInitialTime(int index)
+StepTime Goal::getStepInitialTime(int index)
 {
     return steps.at(index)->getInitialTime();
+}
+
+QDateTime Goal::getStepDeadline(int index)
+{
+    return steps.at(index)->getDeadline();
 }
 
 Goal::~Goal()

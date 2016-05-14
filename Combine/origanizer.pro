@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     organizer.cpp \
     organizerui.cpp \
     newpostui.cpp \
-    newgoalui.cpp
+    newgoalui.cpp \
+    steptime.cpp
 
 FORMS    += organizerui.ui \
     newpostui.ui \
@@ -33,5 +34,6 @@ HEADERS += \
     step.h \
     organizerui.h \
     newpostui.h \
-    newgoalui.h
+    newgoalui.h \
+    steptime.h
 

@@ -1,9 +1,10 @@
 #include "step.h"
 
-Step::Step(QString title, QTime timeToFinish)
+Step::Step(QString title, StepTime hoursToFinish, QDateTime deadline)
 {
+    this->timeToFinish = hoursToFinish;
     this->title = title;
-    this->timeToFinish = timeToFinish;
+    this->deadline = deadline;
     this->completed = false;
 }
 
@@ -17,17 +18,22 @@ QString Step::getTitle()
     return title;
 }
 
-QTime Step::getTimeLeft()
+StepTime Step::getTimeLeft()
 {
     return timeToFinish;
 }
 
-QTime Step::getInitialTime()
+StepTime Step::getInitialTime()
 {
     return initialTimeToFinish;
 }
 
-void Step::reduceStepTime(QTime time)
+void Step::reduceStepTime(StepTime time)
 {
-    this->timeToFinish.addMSecs(QTime().msecsTo(time));
+    this->timeToFinish.reduceSeconds(time.getSeconds());
+}
+
+QDateTime Step::getDeadline()
+{
+    return this->deadline;
 }

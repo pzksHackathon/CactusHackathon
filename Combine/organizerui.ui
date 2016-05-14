@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="mainOrganizerArea_tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -149,6 +149,12 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_6">
                  <item>
                   <widget class="QLabel" name="step2title_label">
+                   <property name="maximumSize">
+                    <size>
+                     <width>140</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>__step2Title__</string>
                    </property>
@@ -210,13 +216,22 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="step2hoursPerStepLeft_label">
+                   <property name="minimumSize">
+                    <size>
+                     <width>180</width>
+                     <height>0</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>__step1HoursPerStepLeft__</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <spacer name="horizontalSpacer_16">
+                  <spacer name="horizontalSpacer_17">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -225,7 +240,7 @@
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>50</width>
+                     <width>20</width>
                      <height>20</height>
                     </size>
                    </property>
@@ -245,6 +260,12 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_7">
                  <item>
                   <widget class="QLabel" name="step3title_label">
+                   <property name="maximumSize">
+                    <size>
+                     <width>140</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>__step3Title__</string>
                    </property>
@@ -306,13 +327,22 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="step3hoursPerStepLeft_label">
+                   <property name="minimumSize">
+                    <size>
+                     <width>180</width>
+                     <height>0</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>__step1HoursPerStepLeft__</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <spacer name="horizontalSpacer_17">
+                  <spacer name="horizontalSpacer_16">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -321,7 +351,7 @@
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>50</width>
+                     <width>20</width>
                      <height>20</height>
                     </size>
                    </property>
@@ -341,6 +371,12 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_8">
                  <item>
                   <widget class="QLabel" name="step4title_label">
+                   <property name="maximumSize">
+                    <size>
+                     <width>140</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>__step4Title__</string>
                    </property>
@@ -402,8 +438,17 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="step4hoursPerStepLeft_label">
+                   <property name="minimumSize">
+                    <size>
+                     <width>180</width>
+                     <height>0</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>__step1HoursPerStepLeft__</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -417,7 +462,7 @@
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>50</width>
+                     <width>20</width>
                      <height>20</height>
                     </size>
                    </property>
@@ -437,6 +482,12 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_9">
                  <item>
                   <widget class="QLabel" name="step5title_label">
+                   <property name="maximumSize">
+                    <size>
+                     <width>140</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>__step5Title__</string>
                    </property>
@@ -498,8 +549,17 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="step5hoursPerStepLeft_label">
+                   <property name="minimumSize">
+                    <size>
+                     <width>180</width>
+                     <height>0</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>__step1HoursPerStepLeft__</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -513,8 +573,8 @@
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>50</width>
-                     <height>17</height>
+                     <width>20</width>
+                     <height>20</height>
                     </size>
                    </property>
                   </spacer>
@@ -533,6 +593,12 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_5">
                  <item>
                   <widget class="QLabel" name="step1title_label">
+                   <property name="maximumSize">
+                    <size>
+                     <width>140</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>__step1Title__</string>
                    </property>
@@ -594,8 +660,17 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="step1hoursPerStepLeft_label">
+                   <property name="minimumSize">
+                    <size>
+                     <width>180</width>
+                     <height>0</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>__step1HoursPerStepLeft__</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -609,7 +684,7 @@
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>50</width>
+                     <width>20</width>
                      <height>20</height>
                     </size>
                    </property>
