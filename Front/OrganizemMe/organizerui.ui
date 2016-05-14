@@ -1806,9 +1806,9 @@
         <property name="geometry">
          <rect>
           <x>40</x>
-          <y>200</y>
+          <y>190</y>
           <width>551</width>
-          <height>222</height>
+          <height>211</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_27">
@@ -1858,6 +1858,12 @@
             <layout class="QHBoxLayout" name="horizontalLayout_48">
              <item>
               <widget class="QLabel" name="label_2">
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Mo</string>
                </property>
@@ -1886,6 +1892,12 @@
             <layout class="QHBoxLayout" name="horizontalLayout_49">
              <item>
               <widget class="QLabel" name="label_3">
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Tu</string>
                </property>
@@ -1914,6 +1926,12 @@
             <layout class="QHBoxLayout" name="horizontalLayout_50">
              <item>
               <widget class="QLabel" name="label_4">
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Wed</string>
                </property>
@@ -1942,6 +1960,12 @@
             <layout class="QHBoxLayout" name="horizontalLayout_51">
              <item>
               <widget class="QLabel" name="label_9">
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Th</string>
                </property>
@@ -1970,6 +1994,12 @@
             <layout class="QHBoxLayout" name="horizontalLayout_52">
              <item>
               <widget class="QLabel" name="label_11">
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Fr</string>
                </property>
@@ -1998,6 +2028,12 @@
             <layout class="QHBoxLayout" name="horizontalLayout_53">
              <item>
               <widget class="QLabel" name="label_12">
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Sat</string>
                </property>
@@ -2026,6 +2062,12 @@
             <layout class="QHBoxLayout" name="horizontalLayout_54">
              <item>
               <widget class="QLabel" name="label_10">
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Sun</string>
                </property>
