@@ -738,16 +738,6 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_3">
                   <item>
-                   <widget class="QLabel" name="timerLabelStart_label">
-                    <property name="text">
-                     <string>Start!</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
                    <widget class="QPushButton" name="startTimer_button">
                     <property name="minimumSize">
                      <size>

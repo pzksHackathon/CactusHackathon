@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     Organizer * organizer = new Organizer();
     Goal * goal = organizer->addGoal("FUCKU", "I am fucking you", "FUCKS");
     Goal * goal2 = organizer->addGoal("Goal 2", "Descr2", "category2");
-    StepTime stTime = StepTime(100, 10, 1);
+    StepTime stTime = StepTime(10, 10, 10);
     QDateTime time = QDateTime(QDate(2016, 12, 12), QTime());
     goal->addNewStep("Dress up", stTime, time);
     goal->addNewStep("Dress1 up", stTime, time);

@@ -48,6 +48,11 @@ bool Goal::isStepCompleted(int index)
     return steps.at(index)->isCompleted();
 }
 
+void Goal::setStepCompleted(int index, bool state)
+{
+    steps.at(index)->setCompleted(state);
+}
+
 QString Goal::getStepTitle(int index)
 {
     return steps.at(index)->getTitle();

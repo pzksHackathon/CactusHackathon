@@ -37,3 +37,8 @@ QDateTime Step::getDeadline()
 {
     return this->deadline;
 }
+
+void Step::setCompleted(bool state)
+{
+    this->completed = state;
+}

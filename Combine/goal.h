@@ -23,6 +23,7 @@ public:
      */
     bool reduceStepTime(int index, StepTime time);
     bool isStepCompleted(int index);
+    void setStepCompleted(int index, bool state);
     QString getStepTitle(int index);
     StepTime getStepTimeLeft(int index);
     StepTime getStepInitialTime(int index);

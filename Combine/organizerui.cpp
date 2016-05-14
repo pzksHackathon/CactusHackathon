@@ -2,11 +2,15 @@
 #include "ui_organizerui.h"
 #include <QDesktopWidget>
 #include <QDebug>
+#include <QTimer>
+#include "steptime.h"
+
 QPushButton * PressedButton = NULL;
 OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::OrganizerUI)
 {
+    startButtonIsPressed = false;
     this->organizer = organizer;
     ui->setupUi(this);
     this->newPostUI_obj = new NewPostUI(this);
@@ -41,6 +45,8 @@ OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
 			label->setText(QString("%1").arg(QString::number(calendar.getMounth()->date(i, j)))); 
 	}
 
+    this->workTimer = new QTimer(this);
+
 }
 void OrganizerUI::onCalendarButtonClicked()
 {
@@ -51,7 +57,7 @@ void OrganizerUI::onCalendarButtonClicked()
     }
     PressedButton = senderObj;
     senderObj->setStyleSheet("background-color : rgb(255, 20, 50)");
-    ui->CalendarActions_Label->setText("Plan " + senderObj->objectName());
+    ui->CalendarActions_Label->setText("Start:" /*calendar + */);
     //ui->CalendarActions_Label->setText(button->objectName());
 }
 
@@ -106,6 +112,8 @@ void OrganizerUI::updateTabGoals()
     on_goalTitle_ComboBox_currentIndexChanged(ui->goalTitle_ComboBox->currentText());
 }
 
+
+
 void OrganizerUI::on_goalTitle_ComboBox_currentIndexChanged(const QString &arg1)
 {
     const int maxSteps = 5;
@@ -159,29 +167,89 @@ void OrganizerUI::on_goalTitle_ComboBox_currentIndexChanged(const QString &arg1)
 
 void OrganizerUI::on_step1_checkBox_clicked()
 {
-    ui->step1_checkBox->setEnabled(false);
-    ui->step2_checkBox->setEnabled(true);
+    ui->step2_checkBox->setEnabled(ui->step1_checkBox->isChecked());
+    QString currentGoal = this->ui->goalTitle_ComboBox->currentText();
+    this->organizer->getGoal(currentGoal)->setStepCompleted(0, ui->step1_checkBox->isChecked());
 }
 
 void OrganizerUI::on_step2_checkBox_clicked()
 {
-    ui->step2_checkBox->setEnabled(false);
-    ui->step3_checkBox->setEnabled(true);
+    ui->step1_checkBox->setEnabled(!ui->step2_checkBox->isChecked());
+    ui->step3_checkBox->setEnabled(ui->step2_checkBox->isChecked());
+    QString currentGoal = this->ui->goalTitle_ComboBox->currentText();
+    this->organizer->getGoal(currentGoal)->setStepCompleted(1, ui->step1_checkBox->isChecked());
 }
 
 void OrganizerUI::on_step3_checkBox_clicked()
 {
-    ui->step3_checkBox->setEnabled(false);
-    ui->step4_checkBox->setEnabled(true);
+    ui->step2_checkBox->setEnabled(!ui->step3_checkBox->isChecked());
+    ui->step4_checkBox->setEnabled(ui->step3_checkBox->isChecked());
+    QString currentGoal = this->ui->goalTitle_ComboBox->currentText();
+    this->organizer->getGoal(currentGoal)->setStepCompleted(2, ui->step1_checkBox->isChecked());
 }
 
 void OrganizerUI::on_step4_checkBox_clicked()
 {
-    ui->step4_checkBox->setEnabled(false);
-    ui->step5_checkBox->setEnabled(true);
+    ui->step3_checkBox->setEnabled(!ui->step4_checkBox->isChecked());
+    ui->step5_checkBox->setEnabled(ui->step4_checkBox->isChecked());
+    QString currentGoal = this->ui->goalTitle_ComboBox->currentText();
+    this->organizer->getGoal(currentGoal)->setStepCompleted(3, ui->step1_checkBox->isChecked());
 }
 
 void OrganizerUI::on_step5_checkBox_clicked()
 {
-    ui->step5_checkBox->setEnabled(false);
+    ui->step4_checkBox->setEnabled(!ui->step5_checkBox->isChecked());
+    QString currentGoal = this->ui->goalTitle_ComboBox->currentText();
+    this->organizer->getGoal(currentGoal)->setStepCompleted(4, ui->step1_checkBox->isChecked());
+}
+
+void OrganizerUI::on_startTimer_button_clicked(bool checked)
+{
+    if(startButtonIsPressed == true)
+    {
+        //TODO: change picture.
+        qDebug() << "true";
+        startButtonIsPressed = false;
+        ui->startTimer_button->setText("Start!");
+        disconnect(workTimer, SIGNAL(timeout()), this, SLOT(decreaseSecond()));
+    }
+    else {
+        //TODO: change picture.
+        qDebug() << "false";
+        startButtonIsPressed = true;
+        ui->startTimer_button->setText("Stop!");
+        connect(workTimer, SIGNAL(timeout()), this, SLOT(decreaseSecond()));
+        this->workTimer->start(1000);
+    }
+}
+
+void OrganizerUI::decreaseSecond()
+{
+    QString currentGoal = this->ui->goalTitle_ComboBox->currentText();
+
+    //TODO: do tempTime for certain step.
+    int index = -1;
+    for (int i = 0; i < 5; i++)
+    {
+        if (!ui->goalSteps_ScrollArea->findChild<QCheckBox *>(QString("step%1_checkBox").arg(QString::number(i + 1)))->isChecked())
+        {
+            index = i;
+            break;
+        }
+
+    }
+    if (-1 != index)
+    {
+        this->organizer->getGoal(currentGoal)->reduceStepTime(index, StepTime(0,0,1));
+        QString labelText = QString("Time left: %1         DeadLine: %2")
+                .arg(this->organizer->getGoal(currentGoal)->getStepTimeLeft(index).toString())
+                .arg(this->organizer->getGoal(currentGoal)->getStepDeadline(index).toString("MMM-dd"));
+        //this->ui->step1hoursPerStepLeft_label->setText(labelText);
+        this->ui->goalSteps_ScrollArea->findChild<QLabel *>(QString("step%1hoursPerStepLeft_label").arg(QString::number(index + 1)))->setText(labelText);
+    }
+}
+
+void OrganizerUI::on_goalSave_button_clicked()
+{
+
 }

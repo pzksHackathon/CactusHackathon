@@ -19,6 +19,7 @@ public:
     StepTime getInitialTime();
     void reduceStepTime(StepTime time);
     QDateTime getDeadline();
+    void setCompleted(bool state);
 };
 
 #endif // STEP

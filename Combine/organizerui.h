@@ -24,6 +24,8 @@ private:
     // pointer to object
     Ui::OrganizerUI *ui;
     Organizer * organizer;
+    bool startButtonIsPressed;
+    QTimer *workTimer;
 
 private slots:
     void tabSelected();
@@ -38,11 +40,12 @@ private slots:
     void on_step2_checkBox_clicked();
 
     void on_step3_checkBox_clicked();
-
     void on_step4_checkBox_clicked();
-
     void on_step5_checkBox_clicked();
     void onCalendarButtonClicked();
+    void on_startTimer_button_clicked(bool checked);
+    void decreaseSecond();
+    void on_goalSave_button_clicked();
 
 private:
     NewPostUI *newPostUI_obj;

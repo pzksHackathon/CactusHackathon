@@ -228,7 +228,7 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -383,6 +383,71 @@
      <height>31</height>
     </rect>
    </property>
+   <item>
+    <property name="text">
+     <string>Personal growth</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Health</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Sport</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Hobby</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Carrer and Job</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Science</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Buisness</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Technic and techologies</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Study</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Mooving</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Traveling</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Foreign languages</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Other</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
