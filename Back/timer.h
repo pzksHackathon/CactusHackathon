@@ -12,6 +12,7 @@ private:
     bool isStopped;
 
 
+
 public:
     Timer (QTime time){
         timeLeft = time;
@@ -21,15 +22,26 @@ public:
 
     QTime getTimeLeft() // returns time left
     {
-        if (!isStopped)
+        if (!this->isTimerEnd())
         {
-            QTime tmptime;
-            curTime.start();
-            tmptime = timeLeft.addSecs(curTime.secsTo(startTime));
-            return tmptime;
+            if (!isStopped)
+            {
+                QTime tmptime;
+                curTime.start();
+                tmptime = timeLeft.addSecs(curTime.secsTo(startTime));
+                return tmptime;
+            }
+            else return timeLeft;
         }
-        else return timeLeft;
+        else
+        {
+            curTime.start();
+            QTime tmptime(0, 0, 0);
+            return tmptime.addSecs(timeLeft.secsTo(tmptime.addSecs(startTime.secsTo(curTime))));
+
+        }
     }
+
 
     QTime getTimeElapsed() // returns the elapsed time from the start
     {
