@@ -11,6 +11,7 @@ OrganizerUI::OrganizerUI(QWidget *parent) :
 {
     ui->setupUi(this);
     this->newPostUI_obj = new NewPostUI(this);
+    this->newGoalUI_obj = new NewGoalUI(this);
 
     // Disable resizing a BattleField window.
     this->setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
@@ -30,4 +31,10 @@ void OrganizerUI::on_newPost_button_clicked()
 {
     this->newPostUI_obj->setModal(false);
     this->newPostUI_obj->show();
+}
+
+void OrganizerUI::on_newGoal_button_clicked()
+{
+    this->newGoalUI_obj->setModal(false);
+    this->newGoalUI_obj->show();
 }

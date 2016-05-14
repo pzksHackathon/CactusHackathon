@@ -4,20 +4,22 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
 
 QT += widgets
 
 TARGET = OrganizemMe
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
         organizerui.cpp \
-    newpostui.cpp
+    newpostui.cpp \
+    newgoalui.cpp
 
 HEADERS  += organizerui.h \
-    newpostui.h
+    newpostui.h \
+    newgoalui.h
 
 FORMS    += organizerui.ui \
-    newpostui.ui
+    newpostui.ui \
+    newgoalui.ui

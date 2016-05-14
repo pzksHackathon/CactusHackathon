@@ -2,7 +2,10 @@
 #define ORGANIZERUI_H
 
 #include <QMainWindow>
+
+// Includes for new windows.
 #include "newpostui.h"
+#include "newgoalui.h"
 
 namespace Ui {
 class OrganizerUI;
@@ -19,8 +22,11 @@ public:
 private slots:
     void on_newPost_button_clicked();
 
+    void on_newGoal_button_clicked();
+
 private:
     NewPostUI *newPostUI_obj;
+    NewGoalUI *newGoalUI_obj;
     Ui::OrganizerUI *ui;
 };
 
