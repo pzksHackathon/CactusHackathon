@@ -4,8 +4,8 @@
 class Day{
 private:
     int date;
-public:
     QTime start, end, left;
+public:
     Day (){
     }
 
@@ -28,6 +28,32 @@ public:
         return date;
     }
 
+    void setEnd (QTime time)
+    {
+        end = time;
+    }
+    void setStart (QTime time)
+    {
+        //start.setHMS(time.hour(), time.minute(), time.second());
+        start = time;
+    }
+    QTime getLeft ()
+    {
+        return left;
+    }
+    QTime getEnd ()
+    {
+        return end;
+    }
+    QTime getStart ()
+    {
+
+        return start;
+    }
+    void setLeft (QTime time)
+    {
+        left = time;
+    }
 };
 
 #endif // DAY

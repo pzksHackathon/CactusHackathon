@@ -26,14 +26,14 @@ public:
         return days[week][day].getDate();
     }
 
-    Day getDay(int week, int day)
+    Day * getDay(int week, int day)
     {
-        return days[week][day];
+        return &(days[week][day]);
     }
 
-    Day getDay(int date)
+    Day * getDay(int date)
     {
-        return days[(date + countDaysBef - 1) / 7][(date + countDaysBef - 1) % 7];
+        return &(days[(date + countDaysBef - 1) / 7][(date + countDaysBef - 1) % 7]);
     }
 };
 

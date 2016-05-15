@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QTimer>
 #include "steptime.h"
-
+Calendar calendar = Calendar(30, 6);
 QPushButton * PressedButton = NULL;
 OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
     QMainWindow(parent),
@@ -37,30 +37,34 @@ OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
         QPushButton * curButton = ui->Calendar_frame->findChild<QPushButton*>(curButtonName);
         connect(curButton, SIGNAL (released()),this, SLOT (onCalendarButtonClicked()));
     }
-    Calendar calendar = Calendar(30, 6);
+
 
 	for (int i = 0; i < calendar.getMounth()->getWeeks(); i++) 
 		for (int j = 0; j < 7; j++) 
 		{ 
 			QString tmpstring = QString("cal_button_%1").arg(QString::number(i * 7 + j + 1)); 
 			QPushButton * label = ui->Calendar_frame->findChild<QPushButton *>(tmpstring); 
-			label->setText(QString("%1").arg(QString::number(calendar.getMounth()->date(i, j)))); 
-	}
+            label->setText(QString("%1").arg(QString::number(calendar.getMounth()->date(i, j))));
+            if (i == 0 && calendar.getMounth()->date(i, j) > 10 || i == calendar.getMounth()->getWeeks() - 1 && calendar.getMounth()->date(i, j) < 10)
+                label->setEnabled(false);
+        }
 
     this->workTimer = new QTimer(this);
 
 }
+
 void OrganizerUI::onCalendarButtonClicked()
 {
     QPushButton *senderObj = (QPushButton *)sender();
     qDebug() << senderObj->objectName();
+    int date = senderObj->text().toInt();
+    Day * curDay = calendar.getMounth()->getDay(date);
     if(PressedButton != NULL){
         PressedButton->setStyleSheet("background-color : rgb(198, 198, 198)");
     }
     PressedButton = senderObj;
     senderObj->setStyleSheet("background-color : rgb(255, 20, 50)");
-    ui->CalendarActions_Label->setText("Start:" /*calendar + */);
-    //ui->CalendarActions_Label->setText(button->objectName());
+    ui->CalendarActions_Label->setText("Start:" + curDay->getStart().toString() + "\nEnd:" + curDay->getEnd().toString() + "\nTime left:" + curDay->getLeft().toString());
 }
 
 Organizer *OrganizerUI::getOrganizer()
@@ -248,10 +252,57 @@ void OrganizerUI::decreaseSecond()
                 .arg(this->organizer->getGoal(currentGoal)->getStepDeadline(index).toString("MMM-dd"));
         //this->ui->step1hoursPerStepLeft_label->setText(labelText);
         this->ui->goalSteps_ScrollArea->findChild<QLabel *>(QString("step%1hoursPerStepLeft_label").arg(QString::number(index + 1)))->setText(labelText);
+        calendar.getMounth()->getDay(QDateTime::currentDateTime().date().day())->setLeft(calendar.getMounth()->getDay(QDateTime::currentDateTime().date().day())->getLeft().addSecs(-1));
+
     }
+
+    // update string in calendar.
+    if (PressedButton != NULL)
+        if (!QString::compare(PressedButton->text(), QString::number(QDateTime::currentDateTime().date().day())))
+        {
+            Day *day = calendar.getMounth()->getDay(QDateTime::currentDateTime().date().day());
+            QString calendarActionText = QString("Start: %1\nEnd: %2\nTime left: %3")
+                    .arg(day->getStart().toString())
+                    .arg(day->getEnd().toString())
+                    .arg(day->getLeft().toString());
+            ui->CalendarActions_Label->setText(calendarActionText);
+        }
+
 }
 
 void OrganizerUI::on_goalSave_button_clicked()
 {
 
+}
+
+void OrganizerUI::on_timeManagSave_button_clicked()
+{
+    for (int i = 0; i < 7; i++)
+    {
+        QTimeEdit * timeEdit = ui->managementFrame->findChild<QTimeEdit *>(QString("timeFrom_%1").arg( QString::number(i + 1)));
+
+        for (int curWeek = 0; curWeek < calendar.getMounth()->getWeeks(); curWeek++)
+        {
+            calendar.getMounth()->getDay(curWeek, i)->setStart(timeEdit->time());
+        }
+        timeEdit = ui->managementFrame->findChild<QTimeEdit *>(QString("timeTo_%1").arg( QString::number(i + 1)));
+        for (int curWeek = 0; curWeek < calendar.getMounth()->getWeeks(); curWeek++)
+            calendar.getMounth()->getDay(curWeek, i)->setEnd(timeEdit->time());
+        for (int curWeek = 0; curWeek < calendar.getMounth()->getWeeks(); curWeek++)
+        {
+            int difference = calendar.getMounth()->getDay(curWeek, i)->getStart().secsTo(calendar.getMounth()->getDay(curWeek, i)->getEnd());
+            if(difference <= 0) {
+                QTime emptyTime = QTime(0,0,0);
+                calendar.getMounth()->getDay(curWeek, i)->setLeft(emptyTime);
+                calendar.getMounth()->getDay(curWeek, i)->setStart(emptyTime);
+                calendar.getMounth()->getDay(curWeek, i)->setEnd(emptyTime);
+                continue;
+            }
+            if (QDateTime::currentDateTime().date().day() != calendar.getMounth()->getDay(curWeek, i)->getDate())
+            {
+                QTime tempTime = QTime(0, 0, 0);
+                calendar.getMounth()->getDay(curWeek, i)->setLeft(tempTime.addSecs(difference));
+            }
+        }
+    }
 }

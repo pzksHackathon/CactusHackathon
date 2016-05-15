@@ -49,6 +49,7 @@ private slots:
     void on_startTimer_button_clicked(bool checked);
     void decreaseSecond();
     void on_goalSave_button_clicked();
+    void on_timeManagSave_button_clicked();
 
 private:
     NewPostUI *newPostUI_obj;
