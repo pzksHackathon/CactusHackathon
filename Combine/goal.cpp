@@ -1,11 +1,12 @@
 #include "goal.h"
 
-
 Goal::Goal(QString name, QString description, QString category)
 {
     this->title = name;
     this->description = description;
     this->category = category;
+    vector<Post> posts;
+    this->diary = new Diary(posts);
 }
 
 QString Goal::getTitle()
@@ -23,6 +24,11 @@ QString Goal::getCategory()
     return category;
 }
 
+Diary *Goal::getDiary()
+{
+    return diary;
+}
+
 void Goal::addNewStep(QString title, StepTime hoursToFinish, QDateTime deadline)
 {
     Step * step = new Step(title, hoursToFinish, deadline);
@@ -33,7 +39,6 @@ int Goal::getStepCount()
 {
     return steps.size();
 }
-
 
 bool Goal::reduceStepTime(int index, StepTime time)
 {

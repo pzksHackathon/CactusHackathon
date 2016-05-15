@@ -38,5 +38,7 @@ HEADERS += organizer.h \
     day.h \
     month.h \
     qcustomplot.h \
-    productivitychart.h
+    productivitychart.h \
+    diary.h \
+    post.h
 

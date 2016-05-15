@@ -4,9 +4,11 @@
 #include <vector>
 #include <QString>
 #include "step.h"
+#include "diary.h"
 using namespace std;
 class Goal{
 private:
+    Diary * diary;
     QString title;
     QString description;
     QString category;
@@ -16,6 +18,7 @@ public:
     QString getTitle();
     QString getDescription();
     QString getCategory();
+    Diary *getDiary();
     void addNewStep(QString title, StepTime hoursToFinish, QDateTime deadline);
     int getStepCount();
     /**

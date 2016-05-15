@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QTimer>
 #include "steptime.h"
+#include "post.h"
+#include "diary.h"
 Calendar calendar = Calendar(30, 6);
 QPushButton * PressedButton = NULL;
 OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
@@ -15,6 +17,7 @@ OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
     ui->setupUi(this);
     this->newPostUI_obj = new NewPostUI(this);
     this->newGoalUI_obj = new NewGoalUI(this);
+    qDebug() << "Going into up chart";
     double hours[] = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f};
     this->chart = new ProductivityChart(hours);
     chart->Show(ui->chart_frame);
@@ -26,10 +29,11 @@ OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
     this->move((QApplication::desktop()->width() - this->size().width()) / 2,
                (QApplication::desktop()->height() - this->size().height()) / 2 - 50);
 
-    // coonnects
+    qDebug() << "Connect tab";
     connect(ui->mainOrganizerArea_tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
     // Updating on first launch
     tabSelected();
+    qDebug() << "Going into buttins";
     // Generate button slots
     for(int i = 1; i <= 7*6; i++)
     {
@@ -50,6 +54,9 @@ OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
         }
 
     this->workTimer = new QTimer(this);
+    qDebug() << "Going into up diary";
+    updateDiary();
+    qDebug() << "Goint out of diary";
 
 }
 
@@ -85,6 +92,10 @@ void OrganizerUI::tabSelected()
         {
             updateTabGoals();
         }
+        case TAB_DIARY:
+        {
+            updateDiary();
+        }
     }
 }
 void OrganizerUI::on_newPost_button_clicked()
@@ -116,6 +127,50 @@ void OrganizerUI::updateTabGoals()
     }
 
     on_goalTitle_ComboBox_currentIndexChanged(ui->goalTitle_ComboBox->currentText());
+}
+
+Ui::OrganizerUI *OrganizerUI::getUi()
+{
+    return ui;
+}
+
+QString OrganizerUI::setNewDiaryPost(QString title, QString description)
+{
+    QDateTime curTime = QDateTime::currentDateTime();
+    Post post = Post(curTime, description, title);
+    Diary * diary = organizer->getGoal(ui->goalTitle_ComboBox_2->currentText())->getDiary();
+    bool isPosted = false;
+    for(Post p : diary->getPosts())
+        if(p.getPushTime().date() == curTime.date())
+            isPosted = true;
+    if(!isPosted)
+        diary->addPost(post);
+    return (ui->goalTitle_ComboBox_2->currentText());
+}
+
+void OrganizerUI::updateDiary()
+{
+    qDebug() <<"Updating diary";
+    //scrollAreaWidgetContents_2
+    for(int i = 0; i < organizer->getGoalCount(); i++)
+    {
+        bool skip = false;
+        for(int j = 0; j < ui->goalTitle_ComboBox_2->count(); j++)
+        {
+            if(QString::compare(ui->goalTitle_ComboBox_2->itemText(j), organizer->getGoal(i)->getTitle()) == 0)
+            {
+                skip = true;
+            }
+        }
+        if(skip)
+            continue;
+        qDebug() << "adding diary combo";
+        qDebug() << QString::number(i);
+        qDebug() << organizer->getGoal(i)->getTitle();
+        ui->goalTitle_ComboBox_2->addItem(organizer->getGoal(i)->getTitle());
+        qDebug() << "added diary combo";
+    }
+    qDebug() <<"Updated diary";
 }
 
 
@@ -235,7 +290,7 @@ void OrganizerUI::decreaseSecond()
 
     //TODO: do tempTime for certain step.
     int index = -1;
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < organizer->getGoalCount(); i++)
     {
         if (!ui->goalSteps_ScrollArea->findChild<QCheckBox *>(QString("step%1_checkBox").arg(QString::number(i + 1)))->isChecked())
         {
@@ -254,7 +309,7 @@ void OrganizerUI::decreaseSecond()
         this->ui->goalSteps_ScrollArea->findChild<QLabel *>(QString("step%1hoursPerStepLeft_label").arg(QString::number(index + 1)))->setText(labelText);
         calendar.getMounth()->getDay(QDateTime::currentDateTime().date().day())->setLeft(calendar.getMounth()->getDay(QDateTime::currentDateTime().date().day())->getLeft().addSecs(-1));
 
-    }
+
 
     // update string in calendar.
     if (PressedButton != NULL)
@@ -267,6 +322,7 @@ void OrganizerUI::decreaseSecond()
                     .arg(day->getLeft().toString());
             ui->CalendarActions_Label->setText(calendarActionText);
         }
+    }
 
 }
 
@@ -305,4 +361,36 @@ void OrganizerUI::on_timeManagSave_button_clicked()
             }
         }
     }
+}
+
+void OrganizerUI::on_goalTitle_ComboBox_2_currentIndexChanged(const QString &arg1)
+{
+    qDebug() << "CB2";
+    Goal * goal = organizer->getGoal(arg1);
+    if(goal == nullptr)
+        return;
+    int i = 0;
+    for(Post post : goal->getDiary()->getPosts())
+    {
+        if(ui->scrollArea->findChild<QFrame *>(QString("post_frame_%1").arg(i + 1)) != nullptr)
+        {
+            ui->scrollArea->findChild<QFrame *>(QString("post_frame_%1").arg(i + 1))->setVisible(true);
+            qDebug() << QString::number(i);
+            QString curPostTitleLabelName = QString("post%1Title_label").arg(i + 1);
+            QLabel * label = ui->scrollArea->findChild<QLabel *>(curPostTitleLabelName);
+            label->setText(post.getTitle());
+            QString curPostDescriptionLabelName = QString("post%1Description_label").arg(i + 1);
+             QLabel * label1 = ui->scrollArea->findChild<QLabel *>(curPostDescriptionLabelName);
+             label1->setText(post.getDescription());
+            QString curPostPushTimLabelNamee = QString("post%1TimeDate_label").arg(i + 1);
+             QLabel * label2 = ui->scrollArea->findChild<QLabel *>(curPostPushTimLabelNamee);
+             label2->setText(post.getPushTime().toString());
+        }
+        i++;
+    }
+    for(int j = i; j < 3; j++)
+    {
+        ui->scrollArea->findChild<QFrame *>(QString("post_frame_%1").arg(j + 1))->setVisible(false);
+    }
+    qDebug() << "CB2_emded";
 }

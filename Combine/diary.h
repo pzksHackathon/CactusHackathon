@@ -13,14 +13,14 @@ public:
         this->posts = posts;
     }
 
-    Post getPost(int pos)
+    vector<Post> getPosts()
     {
-        return posts.at(pos);
+        return posts;
     }
 
     void addPost(Post post)
     {
-        posts.pushBack(post);
+        posts.push_back(post);
     }
 
 

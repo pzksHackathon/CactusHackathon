@@ -21,12 +21,6 @@ public:
     {
         return pushTime;
     }
-
-    QDateTime getPushTime()
-    {
-        return pushTime;
-    }
-
     QString getTitle()
     {
         return title;

@@ -20,13 +20,19 @@ public:
     Organizer * getOrganizer();
     ~OrganizerUI();
     void updateTabGoals();
-
+    Ui::OrganizerUI *getUi();
+    // This functions returns current Goal title.
+    QString setNewDiaryPost(QString title, QString description);
+    void updateDiary();
 private:
     // pointer to object
     Ui::OrganizerUI *ui;
     Organizer * organizer;
     bool startButtonIsPressed;
     QTimer *workTimer;
+
+public slots:
+     void on_goalTitle_ComboBox_2_currentIndexChanged(const QString &arg1);
 
 private slots:
     void tabSelected();
