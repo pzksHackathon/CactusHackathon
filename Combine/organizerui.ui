@@ -50,7 +50,7 @@ border: 5px solid rgb(85, 85, 255);
 }</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -805,7 +805,7 @@ font: 16px &quot;Consolas&quot;;</string>
                  <enum>QFrame::Panel</enum>
                 </property>
                 <property name="text">
-                 <string>__perDayLeft__</string>
+                 <string>Time today done!</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -2205,22 +2205,6 @@ QPushButton:pressed{
        </item>
       </layout>
      </widget>
-     <widget class="QLabel" name="charts_label">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>200</y>
-        <width>61</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Charts</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
@@ -2234,9 +2218,25 @@ QPushButton:pressed{
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_16">
          <item>
+          <spacer name="horizontalSpacer_52">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>50</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
           <widget class="QLabel" name="stat1_label">
            <property name="text">
-            <string>__stat1__</string>
+            <string>Days tracked</string>
            </property>
           </widget>
          </item>
@@ -2261,6 +2261,9 @@ QPushButton:pressed{
            <property name="text">
             <string>__stat1Value__</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item>
@@ -2268,9 +2271,12 @@ QPushButton:pressed{
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>40</width>
+             <width>150</width>
              <height>20</height>
             </size>
            </property>
@@ -2281,9 +2287,25 @@ QPushButton:pressed{
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_17">
          <item>
+          <spacer name="horizontalSpacer_53">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>50</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
           <widget class="QLabel" name="stat2_label">
            <property name="text">
-            <string>__stat2__</string>
+            <string>Hours tracked</string>
            </property>
           </widget>
          </item>
@@ -2308,6 +2330,9 @@ QPushButton:pressed{
            <property name="text">
             <string>__stat2Value__</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item>
@@ -2315,9 +2340,12 @@ QPushButton:pressed{
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>40</width>
+             <width>150</width>
              <height>20</height>
             </size>
            </property>
@@ -2328,9 +2356,25 @@ QPushButton:pressed{
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_18">
          <item>
+          <spacer name="horizontalSpacer_54">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>50</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
           <widget class="QLabel" name="stat3_label">
            <property name="text">
-            <string>__stat3__</string>
+            <string>Minutes tracked</string>
            </property>
           </widget>
          </item>
@@ -2355,6 +2399,9 @@ QPushButton:pressed{
            <property name="text">
             <string>__stat3Value__</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item>
@@ -2362,9 +2409,12 @@ QPushButton:pressed{
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>40</width>
+             <width>150</width>
              <height>20</height>
             </size>
            </property>
@@ -2375,9 +2425,25 @@ QPushButton:pressed{
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_19">
          <item>
+          <spacer name="horizontalSpacer_55">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>50</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
           <widget class="QLabel" name="stat4_label">
            <property name="text">
-            <string>__stat4__</string>
+            <string>Seconds tracked</string>
            </property>
           </widget>
          </item>
@@ -2402,6 +2468,9 @@ QPushButton:pressed{
            <property name="text">
             <string>__stat4Value__</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item>
@@ -2409,9 +2478,12 @@ QPushButton:pressed{
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>40</width>
+             <width>150</width>
              <height>20</height>
             </size>
            </property>
@@ -2425,9 +2497,9 @@ QPushButton:pressed{
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>220</y>
+        <y>200</y>
         <width>731</width>
-        <height>201</height>
+        <height>221</height>
        </rect>
       </property>
       <property name="frameShape">
@@ -2480,7 +2552,7 @@ QPushButton:pressed{
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>10</width>
+             <width>50</width>
              <height>20</height>
             </size>
            </property>
@@ -2489,7 +2561,13 @@ QPushButton:pressed{
          <item>
           <widget class="QLabel" name="levelValue_label">
            <property name="text">
-            <string>__Level_Value__</string>
+            <string>100</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::RichText</enum>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -2498,9 +2576,12 @@ QPushButton:pressed{
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>40</width>
+             <width>250</width>
              <height>20</height>
             </size>
            </property>
@@ -2538,6 +2619,10 @@ QPushButton:pressed{
          </item>
          <item>
           <widget class="QLabel" name="badge1_label">
+           <property name="styleSheet">
+            <string notr="true">background-color:&quot;transparent&quot;;
+background-image: &quot;:/images/images/blue_budgets.png&quot;;</string>
+           </property>
            <property name="text">
             <string>__badge1__</string>
            </property>
@@ -2777,7 +2862,7 @@ QPushButton:pressed{
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -3070,7 +3155,7 @@ QPushButton:pressed{
        </layout>
       </widget>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>41</x>

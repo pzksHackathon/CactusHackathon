@@ -28,7 +28,9 @@ void ProductivityChart::setHours(double hours[])
         currentChart->clearPlottables();
         currentChart->addPlottable(newBars);
         newBars->setName("Country population");
+        newBars->clearData();
         newBars->setData(x, y);
+        currentChart->replot();
     }
 }
 
@@ -42,6 +44,19 @@ void ProductivityChart::Show(QWidget * widget)
         currentChart->yAxis->setRange(0, 12);
         this->setHours(&(this->hours.at(0)));
     }
+    QVector<double> ticks;
+    QVector<QString> labels;
+    ticks << 1 << 2 << 3 << 4 << 5 << 6 << 7;
+    labels << "Monday" << "Tuesday" << "Wednesday" << "Thursday" << "Friday" << "Saturday" << "Sunday";
+    currentChart->xAxis->setAutoTicks(false);
+    currentChart->xAxis->setAutoTickLabels(false);
+    currentChart->xAxis->setTickVector(ticks);
+    currentChart->xAxis->setTickVectorLabels(labels);
+    currentChart->xAxis->setTickLabelRotation(60);
+    currentChart->xAxis->setSubTickCount(0);
+    currentChart->xAxis->setTickLength(0, 4);
+    currentChart->xAxis->grid()->setVisible(true);
+    currentChart->xAxis->setRange(0, 8);
     QBoxLayout *mainLayout = new QBoxLayout(QBoxLayout::LeftToRight);
     mainLayout->addWidget((QWidget *)currentChart);
     widget->setLayout(mainLayout);

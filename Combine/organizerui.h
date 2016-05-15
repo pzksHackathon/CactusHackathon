@@ -32,6 +32,7 @@ private:
     Organizer * organizer;
     bool startButtonIsPressed;
     QTimer *workTimer;
+    QTimer *customUpdateTimer;
     void updateWorkTime();
 
 public slots:
@@ -52,8 +53,10 @@ private slots:
     void on_step3_checkBox_clicked();
     void on_step4_checkBox_clicked();
     void on_step5_checkBox_clicked();
+    void updateGUI();
 
 private:
+    double hours[7] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
     NewPostUI *newPostUI_obj;
     NewGoalUI *newGoalUI_obj;
     ProductivityChart * chart;

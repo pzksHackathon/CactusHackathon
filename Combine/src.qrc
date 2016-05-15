@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>images/blue_budgets.png</file>
+        <file>images/green_budgets.png</file>
+        <file>images/red_budgets.png</file>
+        <file>images/tellow_budgets.png</file>
+        <file>images/violet_budgets.png</file>
+    </qresource>
+</RCC>

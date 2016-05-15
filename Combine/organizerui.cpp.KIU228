@@ -26,7 +26,6 @@ OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
     this->organizer = organizer;
 
     // Fill chart information.
-    double hours[] = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f};
     this->chart = new ProductivityChart(hours);
     chart->Show(ui->chart_frame);
 
@@ -61,11 +60,30 @@ OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
     this->workTimer = new QTimer(this);
 
     connect(ui->mainOrganizerArea_tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
-
+    calendar.getMounth()->getDay(QDateTime::currentDateTime().date().day())->setLeft(QTime(0, 0, 2));
     // Updating on first launch.
     tabSelected();
     updateDiary();
 
+    // Update badges pictures
+    QPixmap pixmap1(":/images/images/blue_budgets.png");
+    this->ui->badge1_label->setPixmap(pixmap1);
+    this->ui->badge1_label->setMask(pixmap1.mask());
+    QPixmap pixmap2(":/images/images/green_budgets.png");
+    this->ui->badge2_label->setPixmap(pixmap2);
+    this->ui->badge2_label->setMask(pixmap2.mask());
+    QPixmap pixmap3(":/images/images/red_budgets.png");
+    this->ui->badge3_label->setPixmap(pixmap3);
+    this->ui->badge3_label->setMask(pixmap3.mask());
+    QPixmap pixmap4(":/images/images/tellow_budgets.png");
+    this->ui->badge4_label->setPixmap(pixmap4);
+    this->ui->badge4_label->setMask(pixmap4.mask());
+    QPixmap pixmap5(":/images/images/violet_budgets.png");
+    this->ui->badge5_label->setPixmap(pixmap5);
+    this->ui->badge5_label->setMask(pixmap5.mask());
+    QPixmap pixmap6(":/images/images/blue_budgets.png");
+    this->ui->badge6_label->setPixmap(pixmap6);
+    this->ui->badge6_label->setMask(pixmap6.mask());
 }
 
 void OrganizerUI::onCalendarButtonClicked()
@@ -75,7 +93,7 @@ void OrganizerUI::onCalendarButtonClicked()
     int date = senderObj->text().toInt();
     Day * curDay = calendar.getMounth()->getDay(date);
     if(PressedButton != NULL){
-        PressedButton->setStyleSheet("background-color : rgb(198, 198, 198)");
+        PressedButton->setStyleSheet("background-color : rgb(255, 255, 255)");
     }
     PressedButton = senderObj;
     senderObj->setStyleSheet("background-color : rgb(255, 20, 50)");
@@ -155,6 +173,16 @@ QString OrganizerUI::setNewDiaryPost(QString title, QString description)
     if(!isPosted)
         diary->addPost(post);
     return (ui->goalTitle_ComboBox_2->currentText());
+}
+
+void OrganizerUI::setNewGoal(QString title, QString description, QString category, QString stepsNames[5], int hours[5], QDateTime dates[5])
+{
+    Goal *newGoal = this->organizer->addGoal(title, description, category);
+    for(int i = 0; i < 5; i++) {
+        if(!QString::compare(stepsNames[i], ""))
+            continue;
+        newGoal->addNewStep(stepsNames[i], StepTime(hours[i], 0,0), dates[i]);
+    }
 }
 
 void OrganizerUI::updateDiary()
@@ -284,7 +312,8 @@ void OrganizerUI::on_startTimer_button_clicked()
 
 void OrganizerUI::decreaseSecond()
 {
-    // Function, that calls every second.
+    // Function, that calls every second
+
     QString currentGoal = this->ui->goalTitle_ComboBox->currentText();
     // Update strings in GoalWindow.
     int index = -1;
@@ -299,11 +328,13 @@ void OrganizerUI::decreaseSecond()
     }
     if (-1 != index)
     {
+
         this->organizer->getGoal(currentGoal)->reduceStepTime(index, StepTime(0,0,1));
         QString labelText = QString("Time left: %1         DeadLine: %2")
                 .arg(this->organizer->getGoal(currentGoal)->getStepTimeLeft(index).toString())
                 .arg(this->organizer->getGoal(currentGoal)->getStepDeadline(index).toString("MMM-dd"));
         this->ui->goalSteps_ScrollArea->findChild<QLabel *>(QString("step%1hoursPerStepLeft_label").arg(QString::number(index + 1)))->setText(labelText);
+        if (calendar.getMounth()->getDay(QDateTime::currentDateTime().date().day())->getLeft() != QTime (0, 0, 0))
         calendar.getMounth()->getDay(QDateTime::currentDateTime().date().day())->setLeft(calendar.getMounth()->getDay(QDateTime::currentDateTime().date().day())->getLeft().addSecs(-1));
     // Update string in calendar.
     if (PressedButton != NULL)
@@ -318,7 +349,15 @@ void OrganizerUI::decreaseSecond()
         }
         updateWorkTime();
     }
-
+    // Update label in GoalsWindow to display CurrentDayTimer
+    int currentDate = QDateTime::currentDateTime().date().day();
+    Day *currentDay = calendar.getMounth()->getDay(currentDate);
+    this->ui->timerPerDayLeft_label->setText(currentDay->getLeft().toString());
+    if (this->organizer->getGoal(currentGoal)->getStepTimeLeft(index).getSeconds() == 1)
+        this->organizer->getGoal(currentGoal)->reduceStepTime(index, StepTime(-1, 0, 0));
+    //
+    this->hours[6] = 10.0f;
+    this->chart->setHours(this->hours);
 }
 
 void OrganizerUI::on_timeManagSave_button_clicked()
@@ -384,21 +423,78 @@ void OrganizerUI::on_goalTitle_ComboBox_2_currentIndexChanged(const QString &arg
 }
 
 void OrganizerUI::updateWorkTime(){
-    int daysToDeadline = QDateTime::currentDateTime().daysTo(this->organizer->getGoal(0/*!!*/)->getStepDeadline(0/*!!*/));
-    int curDate = QDateTime::currentDateTime().date().day();
-    int freeTime = 0;
+
+    int stepsCount = 0;
+    int curSteps[organizer->getGoalCount()];
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+        curSteps[i] = 0;
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+        for (int j = 0; j < organizer->getGoal(i)->getStepCount(); j++)
+            curSteps[i] += int(organizer->getGoal(i)->isStepCompleted(j));
+
     qDebug() << "done";
-    for (int i = curDate; i < curDate + daysToDeadline; i++)
-        freeTime += calendar.getMounth()->getDay(i)->getStart().secsTo(calendar.getMounth()->getDay(i)->getEnd());
+    int stepmax = 0;
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+        if (organizer->getGoal(i)->getStepDeadline(curSteps[stepmax]).daysTo(organizer->getGoal(i)->getStepDeadline(curSteps[i])) > 0)
+            stepmax = i;
 
-    qDebug() << "done1";
-    float timeCoeficient = float(this->organizer->getGoal(0/*!!*/)->getStepTimeLeft(0/*!!*/).getSeconds()) / float(freeTime);
+    qDebug() << "done";
+    int lastDeadline = organizer->getGoal(stepmax)->getStepDeadline(curSteps[stepmax]).date().day();
+    int curDate = QDateTime::currentDateTime().date().day();
+    float coeficients[lastDeadline - curDate];
 
-    qDebug() << "done2";
-    for (int i = curDate + 1; i < curDate + daysToDeadline; i++)
-        calendar.getMounth()->getDay(i)->setLeft(QTime(0, 0, 0).addSecs(round(float(calendar.getMounth()->getDay(i)->getStart().secsTo(calendar.getMounth()->getDay(i)->getEnd())) * timeCoeficient)));
+    qDebug() << "done";
+    for (int i = 0; i < lastDeadline - curDate; i++)
+        coeficients[i] = (float)0.0;
 
-    qDebug() << "done3";
+    qDebug() << "done";
+    int freeTimes[organizer->getGoalCount()];
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+    {
+        freeTimes[i] = 0;
+    }
+
+    qDebug() << "done";
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+    {
+        int tmpdate;
+        tmpdate = curDate;
+        while (organizer->getGoal(i)->getStepDeadline(curSteps[stepmax]).date().day() > tmpdate)
+        {
+            tmpdate++;
+            freeTimes[i] += calendar.getMounth()->getDay(tmpdate)->getStart().secsTo(calendar.getMounth()->getDay(tmpdate)->getEnd());
+        }
+    }
+
+    qDebug() << "done11";
+    int timeToDeadline[organizer->getGoalCount()];
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+        timeToDeadline[i] = organizer->getGoal(i)->getStepDeadline(curSteps[i]).date().day();
+
+
+    qDebug() << "done11";
+    for (int i = curDate + 1; i <= lastDeadline; i++)
+    {
+        for (int j = 0; j < organizer->getGoalCount(); j++)
+        {
+            if (i <= organizer->getGoal(j)->getStepDeadline(curSteps[j]).date().day())
+            {
+                coeficients[i - curDate - 1] += float(organizer->getGoal(j)->getStepTimeLeft(curSteps[j]).getSeconds()) / float(freeTimes[j]);
+                qDebug() << QString::number(float(organizer->getGoal(j)->getStepTimeLeft(curSteps[j]).getSeconds()) / float(freeTimes[j])) << QString::number(freeTimes[j]);
+
+            }
+
+        }
+    }
+
+    qDebug() << "done11";
+    qDebug() << "done";
+    for (int i = curDate + 1; i <= lastDeadline; i++)
+    {
+
+        calendar.getMounth()->getDay(i)->setLeft(QTime(0, 0, 0).addSecs(round(float(calendar.getMounth()->getDay(i)->getStart().secsTo(calendar.getMounth()->getDay(i)->getEnd())) * coeficients[i - curDate - 1])));
+        qDebug() << QString::number(round(float(calendar.getMounth()->getDay(i)->getStart().secsTo(calendar.getMounth()->getDay(i)->getEnd())))) << QString::number(coeficients[i - curDate - 1]);
+    }
 }
 
 void OrganizerUI::on_goalSave_button_clicked()

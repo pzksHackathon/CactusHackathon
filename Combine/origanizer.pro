@@ -42,3 +42,6 @@ HEADERS += organizer.h \
     diary.h \
     post.h
 
+RESOURCES += \
+    src.qrc
+
