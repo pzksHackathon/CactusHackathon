@@ -21,7 +21,6 @@ private slots:
 
 private:
     Ui::NewPostUI *ui;
-    Organizer *organizer;
 };
 
 #endif // NEWPOSTUI_H

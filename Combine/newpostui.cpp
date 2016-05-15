@@ -8,9 +8,6 @@ NewPostUI::NewPostUI(QWidget *parent) :
     ui(new Ui::NewPostUI)
 {
     ui->setupUi(this);
-    // Get Organizer object from NewPostUI parent - OrganizeUI window.
-    OrganizerUI *orgUiParent = (OrganizerUI *)this->parent();
-    this->organizer = orgUiParent->getOrganizer();
 }
 
 NewPostUI::~NewPostUI()

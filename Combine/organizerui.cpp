@@ -157,6 +157,16 @@ QString OrganizerUI::setNewDiaryPost(QString title, QString description)
     return (ui->goalTitle_ComboBox_2->currentText());
 }
 
+void OrganizerUI::setNewGoal(QString title, QString description, QString category, QString stepsNames[5], int hours[5], QDateTime dates[5])
+{
+    Goal *newGoal = this->organizer->addGoal(title, description, category);
+    for(int i = 0; i < 5; i++) {
+        if(!QString::compare(stepsNames[i], ""))
+            continue;
+        newGoal->addNewStep(stepsNames[i], StepTime(hours[i], 0,0), dates[i]);
+    }
+}
+
 void OrganizerUI::updateDiary()
 {
     // Function to update Diary Window.
@@ -316,9 +326,12 @@ void OrganizerUI::decreaseSecond()
                     .arg(day->getLeft().toString());
             ui->CalendarActions_Label->setText(calendarActionText);
         }
-    updateWorkTime();
+        updateWorkTime();
     }
-
+    // Update label in GoalsWindow to display CurrentDayTimer
+    int currentDate = QDateTime::currentDateTime().date().day();
+    Day *currentDay = calendar.getMounth()->getDay(currentDate);
+    this->ui->timerPerDayLeft_label->setText(currentDay->getLeft().toString());
 }
 
 void OrganizerUI::on_timeManagSave_button_clicked()
@@ -392,7 +405,18 @@ void OrganizerUI::updateWorkTime(){
         freeTime += calendar.getMounth()->getDay(i)->getStart().secsTo(calendar.getMounth()->getDay(i)->getEnd());
 
     qDebug() << "done1";
-    float timeCoeficient = float(this->organizer->getGoal(0/*!!*/)->getStepTimeLeft(0/*!!*/).getSeconds()) / float(freeTime);
+    unsigned int timeLeft = 0;
+    for(int i = 0; i < organizer->getGoalCount(); i++)
+    {
+        int j;
+        for(j = 0;
+            j < organizer->getGoal(i)->getStepCount() &&
+            organizer->getGoal(i)->isStepCompleted(j) == true; j++) ;
+        if(j == organizer->getGoal(i)->getStepCount())
+            continue;
+        timeLeft += organizer->getGoal(i)->getStepTimeLeft(j).getSeconds();
+    }
+    float timeCoeficient = float(timeLeft) / float(freeTime);
 
     qDebug() << "done2";
     for (int i = curDate + 1; i < curDate + daysToDeadline; i++)

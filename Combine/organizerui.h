@@ -6,7 +6,9 @@
 #include "newpostui.h"
 #include "newgoalui.h"
 #include "productivitychart.h"
+
 enum TABS {TAB_GOALS, TAB_DIARY, TAB_CALENDAR, TAB_STATS, TAB_PERKS, TAB_TM};
+
 namespace Ui {
 class OrganizerUI;
 }
@@ -22,6 +24,7 @@ public:
     void updateTabGoals();
     // This functions returns current Goal title.
     QString setNewDiaryPost(QString title, QString description);
+    void setNewGoal(QString title, QString description, QString category, QString stepsNames[5], int hours[5], QDateTime dates[5]);
     void updateDiary();
 private:
     // pointer to object

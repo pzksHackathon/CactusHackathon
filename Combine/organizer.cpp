@@ -1,5 +1,5 @@
 #include "organizer.h"
-
+#include <qDebug>
 Goal *Organizer::addGoal(QString name, QString description, QString category)
 {
     Goal * goal = new Goal(name, description, category);

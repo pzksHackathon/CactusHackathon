@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     // Default empty goal.
     Goal * goal = organizer->addGoal("TestGoalTitle", "TestGoalDescription", "TestGoalCategory");
     StepTime stepTime = StepTime(10,10,10);
-    QDateTime dateTime = QDateTime(QDate(2016, 5, 30), QTime(12,0,0));
+    QDateTime dateTime = QDateTime(QDate(2016, 5, 30), QTime(2,0,0));
     goal->addNewStep("Default first step.", stepTime, dateTime);
     goal->addNewStep("Default second step.", stepTime, dateTime);
     goal->addNewStep("Default third step.", stepTime, dateTime);

@@ -50,7 +50,7 @@ border: 5px solid rgb(85, 85, 255);
 }</string>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
