@@ -1,17 +1,74 @@
 void OrganizerUI::updateWorkTime(){
-    int daysToDeadline = QDateTime::currentDateTime().daysTo(this->organizer->getGoal(0/*!!*/)->getStepDeadline(0/*!!*/));
-    int curDate = QDateTime::currentDateTime().date().day();
-    int freeTime = 0;
+
+    int stepsCount = 0;
+    int curSteps[organizer->getGoalCount()];
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+        curSteps[i] = 0;
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+        for (int j = 0; j < organizer->getGoal(i)->getStepCount(); j++)
+            curSteps[i] += int(organizer->getGoal(i)->isStepCompleted(j));
+
     qDebug() << "done";
-    for (int i = curDate; i < curDate + daysToDeadline; i++)
-        freeTime += calendar.getMounth()->getDay(i)->getStart().secsTo(calendar.getMounth()->getDay(i)->getEnd());
+    int stepmax = 0;
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+        if (organizer->getGoal(i)->getStepDeadline(curSteps[stepmax]).daysTo(organizer->getGoal(i)->getStepDeadline(curSteps[i])) > 0)
+            stepmax = i;
 
-    qDebug() << "done1";
-    float timeCoeficient = float(this->organizer->getGoal(0/*!!*/)->getStepTimeLeft(0/*!!*/).getSeconds()) / float(freeTime);
+    qDebug() << "done";
+    int lastDeadline = organizer->getGoal(stepmax)->getStepDeadline(curSteps[stepmax]).date().day();
+    int curDate = QDateTime::currentDateTime().date().day();
+    float coeficients[lastDeadline - curDate];
 
-    qDebug() << "done2";
-    for (int i = curDate + 1; i < curDate + daysToDeadline; i++)
-        calendar.getMounth()->getDay(i)->setLeft(QTime(0, 0, 0).addSecs(round(float(calendar.getMounth()->getDay(i)->getStart().secsTo(calendar.getMounth()->getDay(i)->getEnd())) * timeCoeficient)));
+    qDebug() << "done";
+    for (int i = 0; i < lastDeadline - curDate; i++)
+        coeficients[i] = (float)0.0;
 
-    qDebug() << "done3";
+    qDebug() << "done";
+    int freeTimes[organizer->getGoalCount()];
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+    {
+        freeTimes[i] = 0;
+    }
+
+    qDebug() << "done";
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+    {
+        int tmpdate;
+        tmpdate = curDate;
+        while (organizer->getGoal(i)->getStepDeadline(curSteps[stepmax]).date().day() > tmpdate)
+        {
+            tmpdate++;
+            freeTimes[i] += calendar.getMounth()->getDay(tmpdate)->getStart().secsTo(calendar.getMounth()->getDay(tmpdate)->getEnd());
+        }
+    }
+
+    qDebug() << "done11";
+    int timeToDeadline[organizer->getGoalCount()];
+    for (int i = 0; i < organizer->getGoalCount(); i++)
+        timeToDeadline[i] = organizer->getGoal(i)->getStepDeadline(curSteps[i]).date().day();
+
+
+    qDebug() << "done11";
+    for (int i = curDate + 1; i <= lastDeadline; i++)
+    {
+        for (int j = 0; j < organizer->getGoalCount(); j++)
+        {
+            if (i <= organizer->getGoal(j)->getStepDeadline(curSteps[j]).date().day())
+            {
+                coeficients[i - curDate - 1] += float(organizer->getGoal(j)->getStepTimeLeft(curSteps[j]).getSeconds()) / float(freeTimes[j]);
+                qDebug() << QString::number(float(organizer->getGoal(j)->getStepTimeLeft(curSteps[j]).getSeconds()) / float(freeTimes[j])) << QString::number(freeTimes[j]);
+
+            }
+
+        }
+    }
+
+    qDebug() << "done11";
+    qDebug() << "done";
+    for (int i = curDate + 1; i <= lastDeadline; i++)
+    {
+
+        calendar.getMounth()->getDay(i)->setLeft(QTime(0, 0, 0).addSecs(round(float(calendar.getMounth()->getDay(i)->getStart().secsTo(calendar.getMounth()->getDay(i)->getEnd())) * coeficients[i - curDate - 1])));
+        qDebug() << QString::number(round(float(calendar.getMounth()->getDay(i)->getStart().secsTo(calendar.getMounth()->getDay(i)->getEnd())))) << QString::number(coeficients[i - curDate - 1]);
+    }
 }
