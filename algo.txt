@@ -1,0 +1,17 @@
+void OrganizerUI::updateWorkTime(){
+    int daysToDeadline = QDateTime::currentDateTime().daysTo(this->organizer->getGoal(0/*!!*/)->getStepDeadline(0/*!!*/));
+    int curDate = QDateTime::currentDateTime().date().day();
+    int freeTime = 0;
+    qDebug() << "done";
+    for (int i = curDate; i < curDate + daysToDeadline; i++)
+        freeTime += calendar.getMounth()->getDay(i)->getStart().secsTo(calendar.getMounth()->getDay(i)->getEnd());
+
+    qDebug() << "done1";
+    float timeCoeficient = float(this->organizer->getGoal(0/*!!*/)->getStepTimeLeft(0/*!!*/).getSeconds()) / float(freeTime);
+
+    qDebug() << "done2";
+    for (int i = curDate + 1; i < curDate + daysToDeadline; i++)
+        calendar.getMounth()->getDay(i)->setLeft(QTime(0, 0, 0).addSecs(round(float(calendar.getMounth()->getDay(i)->getStart().secsTo(calendar.getMounth()->getDay(i)->getEnd())) * timeCoeficient)));
+
+    qDebug() << "done3";
+}
