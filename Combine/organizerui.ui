@@ -40,10 +40,17 @@ border: 2px solid rgb(85, 0, 127);
 }
 QTabBar::tab:hover{ 
 background-color:rgb(225, 225, 225); 
+}
+
+QComboBox{
+width: 80px;
+background-color: rgb(98, 145, 255);
+
+border: 5px solid rgb(85, 85, 255);
 }</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -2416,7 +2423,7 @@ QPushButton:pressed{
        <rect>
         <x>0</x>
         <y>220</y>
-        <width>691</width>
+        <width>731</width>
         <height>201</height>
        </rect>
       </property>
@@ -2446,8 +2453,17 @@ QPushButton:pressed{
         <layout class="QHBoxLayout" name="horizontalLayout_20">
          <item>
           <widget class="QLabel" name="level_label">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
-            <string>__Level_Num__</string>
+            <string>Level</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -2522,12 +2538,18 @@ QPushButton:pressed{
            <property name="text">
             <string>__badge1__</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="badge2_label">
            <property name="text">
             <string>__badge2__</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -2536,12 +2558,18 @@ QPushButton:pressed{
            <property name="text">
             <string>__badge3__</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="badge4_label">
            <property name="text">
             <string>_badge4__</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -2550,12 +2578,18 @@ QPushButton:pressed{
            <property name="text">
             <string>_badge5__</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="badge6_label">
            <property name="text">
             <string>__badge6__</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -2656,7 +2690,7 @@ QPushButton:pressed{
               </size>
              </property>
              <property name="text">
-              <string>__Save__</string>
+              <string>Save</string>
              </property>
             </widget>
            </item>
@@ -2722,7 +2756,7 @@ QPushButton:pressed{
        </size>
       </property>
       <property name="text">
-       <string>__Save__</string>
+       <string>Save</string>
       </property>
      </widget>
      <widget class="QWidget" name="layoutWidget">

@@ -20,7 +20,6 @@ public:
     Organizer * getOrganizer();
     ~OrganizerUI();
     void updateTabGoals();
-    Ui::OrganizerUI *getUi();
     // This functions returns current Goal title.
     QString setNewDiaryPost(QString title, QString description);
     void updateDiary();
@@ -36,24 +35,19 @@ public slots:
 
 private slots:
     void tabSelected();
-    void on_newPost_button_clicked();
-
-    void on_newGoal_button_clicked();
-
+    void decreaseSecond();
     void on_goalTitle_ComboBox_currentIndexChanged(const QString &arg1);
-
+    void onCalendarButtonClicked();
+    void on_startTimer_button_clicked();
+    void on_goalSave_button_clicked();
+    void on_timeManagSave_button_clicked();
+    void on_newPost_button_clicked();
+    void on_newGoal_button_clicked();
     void on_step1_checkBox_clicked();
-
     void on_step2_checkBox_clicked();
-
     void on_step3_checkBox_clicked();
     void on_step4_checkBox_clicked();
     void on_step5_checkBox_clicked();
-    void onCalendarButtonClicked();
-    void on_startTimer_button_clicked(bool checked);
-    void decreaseSecond();
-    void on_goalSave_button_clicked();
-    void on_timeManagSave_button_clicked();
 
 private:
     NewPostUI *newPostUI_obj;

@@ -37,7 +37,7 @@ void Goal::addNewStep(QString title, StepTime hoursToFinish, QDateTime deadline)
 
 int Goal::getStepCount()
 {
-    return steps.size();
+    return (int)steps.size();
 }
 
 bool Goal::reduceStepTime(int index, StepTime time)

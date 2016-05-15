@@ -1,4 +1,5 @@
 #include "productivitychart.h"
+
 ProductivityChart::ProductivityChart(double hours[])
 {
     for(int i = 0; i < 7; i++)
@@ -36,16 +37,10 @@ void ProductivityChart::Show(QWidget * widget)
     if(this->currentChart == nullptr)
     {
         this->currentChart = new QCustomPlot();
-
-        //this->setCentralWidget(customPlot);
-
         currentChart->setGeometry(50, 50, 100, 100);
         currentChart->xAxis->setRange(0, 7.9);
         currentChart->yAxis->setRange(0, 12);
         this->setHours(&(this->hours.at(0)));
-
-        // create plot (from quadratic plot example):
-
     }
     QBoxLayout *mainLayout = new QBoxLayout(QBoxLayout::LeftToRight);
     mainLayout->addWidget((QWidget *)currentChart);

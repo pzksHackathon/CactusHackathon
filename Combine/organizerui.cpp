@@ -1,40 +1,44 @@
+#include <QDesktopWidget>
+#include <QTimer>
+
 #include "organizerui.h"
 #include "ui_organizerui.h"
-#include <QDesktopWidget>
-#include <QDebug>
-#include <QTimer>
 #include "steptime.h"
 #include "post.h"
 #include "diary.h"
+
+// Global fields.
 Calendar calendar = Calendar(30, 6);
 QPushButton * PressedButton = NULL;
+
 OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::OrganizerUI)
 {
-    startButtonIsPressed = false;
-    this->organizer = organizer;
     ui->setupUi(this);
+
+    // Create objects for new windows.
     this->newPostUI_obj = new NewPostUI(this);
     this->newGoalUI_obj = new NewGoalUI(this);
-    qDebug() << "Going into up chart";
+
+    // Some default fields initialization.
+    this->startButtonIsPressed = false;
+    this->organizer = organizer;
+
+    // Fill chart information.
     double hours[] = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f};
     this->chart = new ProductivityChart(hours);
     chart->Show(ui->chart_frame);
+
     // Disable resizing a BattleField window.
-    this->setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
     // Disable 'maximize' and 'hide' button in a BattleField window.
-    this->setWindowFlags(Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
     // Move BattleField window to the center of screen.
+    this->setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
+    this->setWindowFlags(Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
     this->move((QApplication::desktop()->width() - this->size().width()) / 2,
                (QApplication::desktop()->height() - this->size().height()) / 2 - 50);
 
-    qDebug() << "Connect tab";
-    connect(ui->mainOrganizerArea_tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
-    // Updating on first launch
-    tabSelected();
-    qDebug() << "Going into buttins";
-    // Generate button slots
+    // Generate button slots.
     for(int i = 1; i <= 7*6; i++)
     {
         QString curButtonName = QString("cal_button_%1").arg(i);
@@ -42,7 +46,7 @@ OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
         connect(curButton, SIGNAL (released()),this, SLOT (onCalendarButtonClicked()));
     }
 
-
+    // Fill calendar.
 	for (int i = 0; i < calendar.getMounth()->getWeeks(); i++) 
 		for (int j = 0; j < 7; j++) 
 		{ 
@@ -53,17 +57,21 @@ OrganizerUI::OrganizerUI(Organizer * organizer, QWidget *parent) :
                 label->setEnabled(false);
         }
 
+    // A timer for tracker.
     this->workTimer = new QTimer(this);
-    qDebug() << "Going into up diary";
+
+    connect(ui->mainOrganizerArea_tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabSelected()));
+
+    // Updating on first launch.
+    tabSelected();
     updateDiary();
-    qDebug() << "Goint out of diary";
 
 }
 
 void OrganizerUI::onCalendarButtonClicked()
 {
+    // Function for tracking previous button position in Calendar tab.
     QPushButton *senderObj = (QPushButton *)sender();
-    qDebug() << senderObj->objectName();
     int date = senderObj->text().toInt();
     Day * curDay = calendar.getMounth()->getDay(date);
     if(PressedButton != NULL){
@@ -86,6 +94,7 @@ OrganizerUI::~OrganizerUI()
 
 void OrganizerUI::tabSelected()
 {
+    // Do certain action depending on opened tab.
     switch(ui->mainOrganizerArea_tabWidget->currentIndex())
     {
         case TAB_GOALS:
@@ -100,17 +109,20 @@ void OrganizerUI::tabSelected()
 }
 void OrganizerUI::on_newPost_button_clicked()
 {
+    // Open "New Post" window.
     this->newPostUI_obj->setModal(true);
     this->newPostUI_obj->show();
 }
 
 void OrganizerUI::on_newGoal_button_clicked()
 {
+    // Open "New Goal" window.
     this->newGoalUI_obj->setModal(true);
     this->newGoalUI_obj->show();
 }
 void OrganizerUI::updateTabGoals()
 {
+    // Function to update ComboBox with list of all goals in Goals tab.
     for(int i = 0; i < organizer->getGoalCount(); i++)
     {
         bool skip = false;
@@ -125,17 +137,14 @@ void OrganizerUI::updateTabGoals()
             continue;
         ui->goalTitle_ComboBox->addItem(organizer->getGoal(i)->getTitle());
     }
-
+    // Update all data in GoalWindow about certain Goal.
     on_goalTitle_ComboBox_currentIndexChanged(ui->goalTitle_ComboBox->currentText());
-}
-
-Ui::OrganizerUI *OrganizerUI::getUi()
-{
-    return ui;
 }
 
 QString OrganizerUI::setNewDiaryPost(QString title, QString description)
 {
+    // Function for handling new Post Creation.
+    // User can add only one summary post per day.
     QDateTime curTime = QDateTime::currentDateTime();
     Post post = Post(curTime, description, title);
     Diary * diary = organizer->getGoal(ui->goalTitle_ComboBox_2->currentText())->getDiary();
@@ -150,8 +159,7 @@ QString OrganizerUI::setNewDiaryPost(QString title, QString description)
 
 void OrganizerUI::updateDiary()
 {
-    qDebug() <<"Updating diary";
-    //scrollAreaWidgetContents_2
+    // Function to update Diary Window.
     for(int i = 0; i < organizer->getGoalCount(); i++)
     {
         bool skip = false;
@@ -164,16 +172,9 @@ void OrganizerUI::updateDiary()
         }
         if(skip)
             continue;
-        qDebug() << "adding diary combo";
-        qDebug() << QString::number(i);
-        qDebug() << organizer->getGoal(i)->getTitle();
         ui->goalTitle_ComboBox_2->addItem(organizer->getGoal(i)->getTitle());
-        qDebug() << "added diary combo";
     }
-    qDebug() <<"Updated diary";
 }
-
-
 
 void OrganizerUI::on_goalTitle_ComboBox_currentIndexChanged(const QString &arg1)
 {
@@ -264,19 +265,16 @@ void OrganizerUI::on_step5_checkBox_clicked()
     this->organizer->getGoal(currentGoal)->setStepCompleted(4, ui->step1_checkBox->isChecked());
 }
 
-void OrganizerUI::on_startTimer_button_clicked(bool checked)
+void OrganizerUI::on_startTimer_button_clicked()
 {
+    // Function to handle startButton behavior.
     if(startButtonIsPressed == true)
     {
-        //TODO: change picture.
-        qDebug() << "true";
         startButtonIsPressed = false;
         ui->startTimer_button->setText("Start!");
         disconnect(workTimer, SIGNAL(timeout()), this, SLOT(decreaseSecond()));
     }
     else {
-        //TODO: change picture.
-        qDebug() << "false";
         startButtonIsPressed = true;
         ui->startTimer_button->setText("Stop!");
         connect(workTimer, SIGNAL(timeout()), this, SLOT(decreaseSecond()));
@@ -286,9 +284,9 @@ void OrganizerUI::on_startTimer_button_clicked(bool checked)
 
 void OrganizerUI::decreaseSecond()
 {
+    // Function, that calls every second.
     QString currentGoal = this->ui->goalTitle_ComboBox->currentText();
-
-    //TODO: do tempTime for certain step.
+    // Update strings in GoalWindow.
     int index = -1;
     for (int i = 0; i < organizer->getGoalCount(); i++)
     {
@@ -305,13 +303,9 @@ void OrganizerUI::decreaseSecond()
         QString labelText = QString("Time left: %1         DeadLine: %2")
                 .arg(this->organizer->getGoal(currentGoal)->getStepTimeLeft(index).toString())
                 .arg(this->organizer->getGoal(currentGoal)->getStepDeadline(index).toString("MMM-dd"));
-        //this->ui->step1hoursPerStepLeft_label->setText(labelText);
         this->ui->goalSteps_ScrollArea->findChild<QLabel *>(QString("step%1hoursPerStepLeft_label").arg(QString::number(index + 1)))->setText(labelText);
         calendar.getMounth()->getDay(QDateTime::currentDateTime().date().day())->setLeft(calendar.getMounth()->getDay(QDateTime::currentDateTime().date().day())->getLeft().addSecs(-1));
-
-
-
-    // update string in calendar.
+    // Update string in calendar.
     if (PressedButton != NULL)
         if (!QString::compare(PressedButton->text(), QString::number(QDateTime::currentDateTime().date().day())))
         {
@@ -323,20 +317,14 @@ void OrganizerUI::decreaseSecond()
             ui->CalendarActions_Label->setText(calendarActionText);
         }
     }
-
-}
-
-void OrganizerUI::on_goalSave_button_clicked()
-{
-
 }
 
 void OrganizerUI::on_timeManagSave_button_clicked()
 {
+    // Button in "Time Management", that saves inputed time.
     for (int i = 0; i < 7; i++)
     {
         QTimeEdit * timeEdit = ui->verticalLayout_27->findChild<QTimeEdit *>(QString("timeFrom_%1").arg( QString::number(i + 1)));
-
         for (int curWeek = 0; curWeek < calendar.getMounth()->getWeeks(); curWeek++)
         {
             calendar.getMounth()->getDay(curWeek, i)->setStart(timeEdit->time());
@@ -365,7 +353,6 @@ void OrganizerUI::on_timeManagSave_button_clicked()
 
 void OrganizerUI::on_goalTitle_ComboBox_2_currentIndexChanged(const QString &arg1)
 {
-    qDebug() << "CB2";
     Goal * goal = organizer->getGoal(arg1);
     if(goal == nullptr)
         return;
@@ -375,7 +362,6 @@ void OrganizerUI::on_goalTitle_ComboBox_2_currentIndexChanged(const QString &arg
         if(ui->scrollArea->findChild<QFrame *>(QString("post_frame_%1").arg(i + 1)) != nullptr)
         {
             ui->scrollArea->findChild<QFrame *>(QString("post_frame_%1").arg(i + 1))->setVisible(true);
-            qDebug() << QString::number(i);
             QString curPostTitleLabelName = QString("post%1Title_label").arg(i + 1);
             QLabel * label = ui->scrollArea->findChild<QLabel *>(curPostTitleLabelName);
             label->setText(post.getTitle());
@@ -392,5 +378,9 @@ void OrganizerUI::on_goalTitle_ComboBox_2_currentIndexChanged(const QString &arg
     {
         ui->scrollArea->findChild<QFrame *>(QString("post_frame_%1").arg(j + 1))->setVisible(false);
     }
-    qDebug() << "CB2_emded";
+}
+
+void OrganizerUI::on_goalSave_button_clicked()
+{
+
 }
