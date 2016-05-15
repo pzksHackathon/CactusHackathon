@@ -279,13 +279,13 @@ void OrganizerUI::on_timeManagSave_button_clicked()
 {
     for (int i = 0; i < 7; i++)
     {
-        QTimeEdit * timeEdit = ui->managementFrame->findChild<QTimeEdit *>(QString("timeFrom_%1").arg( QString::number(i + 1)));
+        QTimeEdit * timeEdit = ui->verticalLayout_27->findChild<QTimeEdit *>(QString("timeFrom_%1").arg( QString::number(i + 1)));
 
         for (int curWeek = 0; curWeek < calendar.getMounth()->getWeeks(); curWeek++)
         {
             calendar.getMounth()->getDay(curWeek, i)->setStart(timeEdit->time());
         }
-        timeEdit = ui->managementFrame->findChild<QTimeEdit *>(QString("timeTo_%1").arg( QString::number(i + 1)));
+        timeEdit = ui->verticalLayout_27->findChild<QTimeEdit *>(QString("timeTo_%1").arg( QString::number(i + 1)));
         for (int curWeek = 0; curWeek < calendar.getMounth()->getWeeks(); curWeek++)
             calendar.getMounth()->getDay(curWeek, i)->setEnd(timeEdit->time());
         for (int curWeek = 0; curWeek < calendar.getMounth()->getWeeks(); curWeek++)

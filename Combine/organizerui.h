@@ -4,8 +4,8 @@
 #include <QMainWindow>
 #include "organizer.h"
 #include "newpostui.h"
-#include "productivitychart.h"
 #include "newgoalui.h"
+#include "productivitychart.h"
 enum TABS {TAB_GOALS, TAB_DIARY, TAB_CALENDAR, TAB_STATS, TAB_PERKS, TAB_TM};
 namespace Ui {
 class OrganizerUI;
@@ -23,12 +23,10 @@ public:
 
 private:
     // pointer to object
-    ProductivityChart * chart;
     Ui::OrganizerUI *ui;
     Organizer * organizer;
     bool startButtonIsPressed;
     QTimer *workTimer;
-
 
 private slots:
     void tabSelected();
@@ -54,6 +52,7 @@ private slots:
 private:
     NewPostUI *newPostUI_obj;
     NewGoalUI *newGoalUI_obj;
+    ProductivityChart * chart;
 };
 
 #endif // ORGANIZERUI_H
