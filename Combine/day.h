@@ -4,7 +4,7 @@
 class Day{
 private:
     int date;
-    QTime start, end, left;
+    QTime start, end, left, done;
 public:
     Day (){
     }
@@ -15,6 +15,7 @@ public:
         start = QTime(0, 0, 0);
         end = QTime(0, 0, 0);
         left = QTime(0, 0, 0);
+        done = QTime (0, 0, 0);
     }
     Day (int date, QTime start, QTime end, QTime left)
     {
@@ -37,6 +38,11 @@ public:
         //start.setHMS(time.hour(), time.minute(), time.second());
         start = time;
     }
+    void setDone (QTime time)
+    {
+        done = time;
+    }
+
     QTime getLeft ()
     {
         return left;
@@ -50,6 +56,11 @@ public:
 
         return start;
     }
+    QTime getDone ()
+    {
+        return done;
+    }
+
     void setLeft (QTime time)
     {
         left = time;
