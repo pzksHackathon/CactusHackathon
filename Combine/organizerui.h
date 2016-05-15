@@ -29,6 +29,7 @@ private:
     Organizer * organizer;
     bool startButtonIsPressed;
     QTimer *workTimer;
+    void updateWorkTime();
 
 public slots:
      void on_goalTitle_ComboBox_2_currentIndexChanged(const QString &arg1);

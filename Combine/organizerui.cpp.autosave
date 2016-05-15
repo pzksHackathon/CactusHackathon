@@ -316,7 +316,7 @@ void OrganizerUI::decreaseSecond()
                     .arg(day->getLeft().toString());
             ui->CalendarActions_Label->setText(calendarActionText);
         }
-    updateWorkTime();
+        updateWorkTime();
     }
 
 }
